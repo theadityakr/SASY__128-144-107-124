@@ -5,9 +5,12 @@ const bodyParser = require("body-parser");
 const request =require("request");
 const mongoose =require("mongoose");
 
+
 const app =express();
-app.use(bodyParser.urlencoded({extended:true}));
+app.set("view-engine","ejs");
 app.use(express.static("public"));
+app.use(bodyParser.urlencoded({extended:true}));
+
 
 mongoose.connect("mongodb://localhost:27017/todo",{useNewUrlParser:true});
 
@@ -57,20 +60,37 @@ const Visitor=mongoose.model("Visitor",visitorsSchema);
 //   emails.push(collection[i].email);
 //   passwords.push(collections[i].pass);
 // }
+
 app.get("/",function(req,res){
-  res.sendfile(__dirname+"/rlex-login.html");
+  res.sendFile(__dirname+"/rlex-login.html");
 });
 
 app.get("/rlex-signup.html",function(req,res){
-  res.sendfile(__dirname+"/rlex-signup.html");
+  res.sendFile(__dirname+"/rlex-signup.html");
 });
+
+var detail=[
+  {name:"ysk",
+  id:"HH",
+  email:"JJJ",
+  address:"sdsjdhs",
+  sex:"Male",
+  mobile:"7563458"}
+]
 
 app.post("/",function(req,res)
 {
   var email=req.body.myemail;
   var pass=req.body.password;
-  // console.log(req.body["password"]);
-  Admin.findOne({id:email},function(err,check){
+  var x=0;
+  var b=email[0];
+  email=email.slice(1,email.length);
+  if(b=="a")
+  find();
+  else if(b=="v")
+  find2();
+  async function find(){
+   Admin.findOne({id:email},function(err,check){
     if(err)
     {
       console.log(err);
@@ -79,30 +99,40 @@ app.post("/",function(req,res)
       if(check)
       {
         if(check.pass==pass)
-        res.send("Login Success");
-        else
-        res.send("Invalid pass");
-      }
-    }
-  })
-  Visitor.findOne({name:email},function(err,check){
-    if(err)
-    {
-      console.log(err);
-    }
-    else{
-      if(check)
-      {
-        if(check.pass==pass)
-        res.send("Login Success");
-        else
-        res.send("Invalid pass");
-      }
-    }
-  })
+        {
+          // res.sendFile(__dirname+"/admin_profile.html");
 
-  // if(Admin.findOne({id:email})==null)
-  res.send("Invalid ID");
+          res.render("admin_profile.ejs",{details: detail});
+        }
+        else
+        res.send("Invalid pass");
+      }
+      else
+      res.send("Invalid ID");
+    }
+  })
+}
+
+async function find2(){
+  await Visitor.findOne({name:email},function(err,check){
+    if(err)
+    {
+      console.log(err);
+    }
+    else{
+      if(check)
+      {
+        if(check.pass==pass)
+        res.send("Login Success");
+        else
+        x=2;
+        res.send("Invalid pass");
+      }
+      else
+      res.send("Invalid ID");
+    }
+  })
+}
 
 });
 
