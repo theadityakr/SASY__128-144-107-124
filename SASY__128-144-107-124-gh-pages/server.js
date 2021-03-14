@@ -4,7 +4,7 @@ const express =require("express");
 const bodyParser = require("body-parser");
 const request =require("request");
 const mongoose =require("mongoose");
-
+var nodemailer = require('nodemailer');
 
 const app =express();
 app.set("view-engine","ejs");
@@ -23,15 +23,34 @@ const adminsSchema=new mongoose.Schema ({
 const visitorsSchema=new mongoose.Schema ({
   name:String,
   sex:String,
+  id:String,
   address:String,
   email:String,
   mobile:String,
   aadhar:String,
   pass:String,
+  status:String
 });
 
 const Admin=mongoose.model("Admin",adminsSchema);
 const Visitor=mongoose.model("Visitor",visitorsSchema);
+
+var start=1000001;
+findVisitor();
+async function findVisitor(){
+  await Visitor.find({},function(err,check){
+    if(err)
+    {
+      console.log(err);
+    }
+    else{
+      start=Number(check[0].id)+1;
+      console.log("Visitors Stored");
+      return;
+    }
+  })
+};
+console.log(start);
 // const admin1=new Admin({
 //   name:"yash",
 //   id:"1",
@@ -61,6 +80,8 @@ const Visitor=mongoose.model("Visitor",visitorsSchema);
 //   passwords.push(collections[i].pass);
 // }
 
+
+
 app.get("/",function(req,res){
   res.sendFile(__dirname+"/rlex-login.html");
 });
@@ -83,13 +104,18 @@ app.post("/",function(req,res)
   var email=req.body.myemail;
   var pass=req.body.password;
   var x=0;
+
   var b=email[0];
   email=email.slice(1,email.length);
+
   if(b=="a")
-  find();
+  findAdmin();
   else if(b=="v")
-  find2();
-  async function find(){
+  findVisitor();
+
+
+  //Search in admin table
+  async function findAdmin(){
    Admin.findOne({id:email},function(err,check){
     if(err)
     {
@@ -100,21 +126,28 @@ app.post("/",function(req,res)
       {
         if(check.pass==pass)
         {
-          // res.sendFile(__dirname+"/admin_profile.html");
-
-          res.render("admin_profile.ejs",{details: detail});
+          res.render("admin_profile.ejs",{Admin_Name:check.name, details:detail});
+          return;
         }
         else
-        res.send("Invalid pass");
+        {
+          res.send("Invalid pass");
+          return;
+        }
       }
       else
-      res.send("Invalid ID");
+      {
+        res.send("Invalid ID");
+        return;
+      }
     }
   })
 }
 
-async function find2(){
-  await Visitor.findOne({name:email},function(err,check){
+
+//Search in visitor table
+async function findVisitor(){
+  await Visitor.findOne({id:email},function(err,check){
     if(err)
     {
       console.log(err);
@@ -122,14 +155,22 @@ async function find2(){
     else{
       if(check)
       {
-        if(check.pass==pass)
-        res.send("Login Success");
+        if(check.pass==pass && check.status=="active")
+        {
+          res.send("Login Success");
+          return;
+        }
         else
-        x=2;
-        res.send("Invalid pass");
+        {
+          res.send("Invalid pass");
+          return;
+        }
       }
       else
-      res.send("Invalid ID");
+      {
+        res.send("Invalid ID");
+        return;
+      }
     }
   })
 }
@@ -147,10 +188,29 @@ app.post("/rlex-signup.html",function(req,res)
   var vAadhar=req.body.aadhar
   var vPass=req.body.pass;
   var vSex="";
-  if( vRadiofemale=="on")
+  if( vRadiofemale=="ON")
   vSex="Male";
   else
   sex="Female";
+  var vId=start;
+  start=start+1;
+  // find();
+  // async function find(){
+  //
+  //   // db.demo141.find().sort({_id:-1}).limit(1);
+  // await  Visitor.find({},function(err,check).sort({id:-1}).limit(1){
+  //     if(err)
+  //     {
+  //       console.log(err);
+  //     }
+  //     else{
+  //       if(check)
+  //       {
+  //         vId=check.id+1;
+  //       }
+  //     }
+  //   })
+  // }
 
   const visitor=new Visitor({
     name: vName,
@@ -159,12 +219,43 @@ app.post("/rlex-signup.html",function(req,res)
     email: vEmail,
     mobile: vMobile,
     aadhar: vAadhar,
+    id:vId,
     pass: vPass,
+    status: "active"
   });
 
  visitor.save();
-  res.send("Registration Success Proceed to login");
 
+ //Sending email
+ // var transporter = nodemailer.createTransport({
+ //   service: 'gmail',
+ //   auth: {
+ //     user: 'vms.sasy@gmail.com',
+ //     pass: 'sasy2019'
+ //   }
+ // });
+ //
+ // var mailOptions = {
+ //   from: 'vms.sasy@gmail.com',
+ //   to: vEmail,
+ //   subject: 'Registration on VMS',
+ //   text: 'Thanks for registration',
+ //   attachments:[{
+ //     path:__dirname+'/website-design-ideas-start-with-grayscale-768x530.jpg',
+ //     // path:__dirname+'/'
+ //   }]
+ // };
+ //
+ // transporter.sendMail(mailOptions, function(error, info){
+ //   if (error) {
+ //     console.log(error);
+ //   } else {
+ //     console.log('Email sent: ' + info.response);
+ //   }
+ // });
+
+
+ res.send("Registration Success Proceed to login. Your id is: "+vId);
 
   // res.redirect("/");
 });
