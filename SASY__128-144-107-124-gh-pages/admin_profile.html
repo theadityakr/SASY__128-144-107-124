@@ -9,10 +9,10 @@
     <title>Admin Profile</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;500&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;500&display=swap" rel="stylesheet">
 
-   
-</head> 
+
+</head>
 
 
 
@@ -52,12 +52,12 @@
 
 
        <a  onclick="change_detail_func();" class="nav-item nav-link  navbar-ic-position " id="head-color" href="">change details</a>
-    
+
     <a onclick="extendfunc();" class="nav-item nav-link navbar-ic-position " id="head-color" href="">extend</a>
 
 
     <a onclick="deactivatefunc();"  class="nav-item nav-link navbar-ic-position " id="head-color" href="">deactivate</a>
-     
+
     </div> -->
   </div>
 </nav>
@@ -85,37 +85,42 @@
     <p style="font-size: 40px">Visitor Details</p>
 
   <div class="form-group">
-    <label for="exampleInputEmail1">user_id</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <label for="visitor_id">visitor_id</label>
+    <input type="text" class="form-control" id="visitor_id" value="<%= username %>" >
   </div>
 
    <div class="form-group">
-    <label for="exampleInputEmail1">name</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <label for="name">name</label>
+    <input type="text" class="form-control" id="name" value="<%= name %>" >
   </div>
 
    <div class="form-group">
-    <label for="exampleInputEmail1">sex</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <label for="sex">sex</label>
+    <input type="text" class="form-control" id="sex" value="<%= sex %>" >
   </div>
 
    <div class="form-group">
     <label for="exampleInputEmail1">email</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<%= email %>">
   </div>
 
    <div class="form-group">
-    <label for="exampleInputEmail1">mobile</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <label for="mobile">mobile</label>
+    <input type="text" class="form-control" id="mobile" value="<%= mobile %>">
   </div>
 
    <div class="form-group">
-    <label for="exampleInputEmail1">address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <label for="address">address</label>
+    <input type="text" class="form-control" id="address" value="<%= address %>">
   </div>
 
+  <div class="form-group">
+   <label for="status">status</label>
+   <input type="text" class="form-control" id="address" value="<%= status %>">
+ </div>
+
    <div class="form-group">
-    <label for="exampleInputEmail1">duration of stay</label>
+    <label >duration of stay</label>
 
   <div class="input-group">
     <input type="text" class="form-control" placeholder="visiting time"/>
@@ -141,7 +146,7 @@
 </div>
 
 </div>
- 
+
 
 
 
@@ -213,6 +218,6 @@
   <script src="js/script.js"></script>
   <script src="js/ajax-utils.js"></script>
     <script src="js/admin.js"></script>
-   
+
 </body>
-</html>  
+</html>
