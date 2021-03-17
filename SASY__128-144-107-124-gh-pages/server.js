@@ -1,4 +1,5 @@
 //jshint esversion:6
+
 require('dotenv').config();
 const express =require("express");
 const bodyParser = require("body-parser");
@@ -8,6 +9,7 @@ const nodemailer = require('nodemailer');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
+const crypto = require('crypto');
 
 const app =express();
 
@@ -44,25 +46,40 @@ const visitorsSchema=new mongoose.Schema ({
   status:String
 });
 
+const usersSchema=new mongoose.Schema({
+  username:String,
+  password:String,
+  name:String,
+  sex:String,
+  address:String,
+  email:String,
+  mobile:String,
+  aadhar:String,
+  status:String,
+  forgetPass:String,
+})
+
 adminsSchema.plugin(passportLocalMongoose);
 visitorsSchema.plugin(passportLocalMongoose);
+usersSchema.plugin(passportLocalMongoose);
 
 const Admin=mongoose.model("Admin",adminsSchema);
 const Visitor=mongoose.model("Visitor",visitorsSchema);
+const User=mongoose.model("User",usersSchema);
 
-passport.use(Admin.createStrategy());
-passport.serializeUser(Admin.serializeUser());
-passport.deserializeUser(Admin.deserializeUser());
-
-passport.use(Visitor.createStrategy());
-passport.serializeUser(Visitor.serializeUser());
-passport.deserializeUser(Visitor.deserializeUser());
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+//
+// passport.use(Visitor.createStrategy());
+// passport.serializeUser(Visitor.serializeUser());
+// passport.deserializeUser(Visitor.deserializeUser());
 
 var start=1000001;
 
 findVisitor();
 async function findVisitor(){
-  await Visitor.find({},function(err,check){
+  await User.find({username:{ $regex: /^v/ }},function(err,check){
     if(err)
     {
       console.log(err);
@@ -70,8 +87,8 @@ async function findVisitor(){
     else{
       if(check.length>0)
       {
-
-        start=Number(check[check.length-1].username)+1;
+        var username=check[check.length-1].username.slice(1,check[check.length-1].username.length);
+        start=Number(username)+1;
         console.log("Visitors Stored");
         console.log(check);
       }
@@ -79,7 +96,9 @@ async function findVisitor(){
     }
   })
 };
-
+console.log(start);
+// var f=start.toString();
+// console.log(f);
 // const admin1=new Admin({
 //   name:"yash",
 //   id:"1",
@@ -106,7 +125,7 @@ async function findVisitor(){
 
 // Admin.register({
 //   name: "YSK",
-//   username: "1000003"},
+//   username: "a1000003"},
 //   "y",
 //   function(err,user){
 //     if(err)
@@ -120,31 +139,121 @@ async function findVisitor(){
 //         // res.redirect("admin_profile");
 //       }
 //     }
+//     User.register({
+//       name: "YSK",
+//       username: "a1000003",
+//       sex:"Male",
+//       address:"",
+//       email:"",
+//       mobile:"",
+//       aadhar:"",
+//       status:"",
+//       forgetPass:undefined,
+//     },
+//       "y",
+//       function(err,user){
+//         if(err)
+//         {
+//           console.log(err);
+//           // res.redirect("/register");
+//         }
+//         else{
+//           // passport.authenticate("local")(req,res,function(){
+//             console.log("User registered");
+//             // res.redirect("admin_profile");
+//           }
+//         }
 //
 // );
 
 app.get("/",function(req,res){
   res.sendFile(__dirname+"/home.html");
 });
+app.get("/home",function(req,res){
+  res.redirect("/");
+});
 
 app.get("/login",function(req,res){
+
+  if(req.isAuthenticated())
+  {
+    res.redirect("/profile");
+  }
+  else
   res.sendFile(__dirname+"/login.html");
 });
 
+app.get("/logout",function(req,res){
+  if(req.isAuthenticated())
+  {
+    req.logout();
+    res.redirect("/login");
+  }
+  else
+  {
+    res.redirect("/login");
+  }
+});
+
 app.get("/signup",function(req,res){
-  res.sendFile(__dirname+"/signup.html");
+  if(req.isAuthenticated() && req.user.username[0]=="a")
+  {
+    // console.log(req.user.username);
+    res.sendFile(__dirname+"/signup.html");
+  }
+  else
+  {
+    res.redirect("/login");
+  }
+
 });
 
 app.get("/search_visitor",function(req,res){
   res.redirect("/admin_profile");
 });
 
+app.get("/forgetPass",function(req,res){
+  res.sendFile(__dirname+"/forgetPass.html");
+});
+
+
+//RESET
+app.get("/reset/:token",function(req,res){
+    console.log( req.params.token);
+    var forgetPass=req.params.token;
+    // res.sendFile(__dirname+"/resetPass.html");
+
+    // // console.log(req.username);
+    User.findOne({forgetPass:forgetPass},function(err,user){
+      if(err)
+      {
+        console.log(err);
+      }
+      else{
+        if(user){
+          console.log(user);
+                res.render("resetPass.ejs",{user:user});
+        }
+        else
+        res.send("Invalid link");
+      }
+
+    })
+
+});
+
+
+
+
+
 app.get("/admin_profile",function(req,res){
-  if(req.isAuthenticated())
+// console.log(req.user.username);
+  if(req.isAuthenticated() )
   {
+    console.log(req.params.username);
       findVisitor();
       async function findVisitor(){
-        await Visitor.find({},function(err,check){
+        await User.find({username:{ $regex: /^v/ }},function(err,check){
           if(err)
           {
             console.log(err);
@@ -159,7 +268,8 @@ app.get("/admin_profile",function(req,res){
                 "mobile":"",
                 "aadhar":"",
                 "password":"",
-                "status":""
+                "status":"",
+                "forgetPass":undefined,
               };
               res.render("admin_profile.ejs",{Admin_Name:req.user.name,details:check,visitor:user});
 
@@ -172,6 +282,48 @@ app.get("/admin_profile",function(req,res){
   else{
     res.redirect("/login");
   }
+});
+
+app.get("/visitor_profile",function(req,res){
+
+  if(req.isAuthenticated())
+  {
+      var username= req.user.username;
+      console.log(username);
+      findVisitor();
+      async function findVisitor(){
+        await User.findOne({username:username},function(err,user){
+          if(err)
+          {
+            console.log(err);
+          }
+          else{
+              res.render("visitor_profile.ejs",{Visitor_Name:user.name,visitor:user});
+        }
+        })
+      };
+
+  }
+    // res.render("admin_profile");
+  else{
+    res.redirect("/login");
+  }
+});
+
+app.get("/profile",function(req,res){
+  if(req.isAuthenticated()){
+    if(req.user.username[0]=="a")
+    {
+      res.redirect("/admin_profile");
+    }
+    else
+    res.redirect("/visitor_profile");
+  }
+  else
+  {
+    res.redirect("/login");
+  }
+
 });
 //
 // var detail=[
@@ -190,12 +342,13 @@ app.post("/login",function(req,res)
   var x=0;
 
   var b=email[0];
-  email=email.slice(1,email.length);
-
+  // email=email.slice(1,email.length);
+  console.log(email);
+  console.log(pass);
   if(b=="a")
   {
     // console.log(pass);
-    const user= new Admin({
+    const user= new User({
       username:email,
       password:pass
     });
@@ -208,10 +361,28 @@ app.post("/login",function(req,res)
       else{
           passport.authenticate('localhost')(req,res,function(){
             res.redirect("/admin_profile");
-          console.log("HII");
+          console.log("HII admin");
+        })
+      }
+    })
+  }
+  else if(b=="v")
+  {
 
-
-          // res.redirect("/home");
+    const user= new User({
+      username:email,
+      password:pass
+    });
+    console.log("visitor id");
+    req.login(user,function(err){
+      if(err)
+      {
+        console.log(err);
+      }
+      else{
+            passport.authenticate('localhost')(req,res,function(){
+            res.redirect("/visitor_profile");
+            console.log("Hiii visitor");
         })
       }
     })
@@ -307,12 +478,20 @@ app.post("/signup",function(req,res)
   var vAadhar=req.body.aadhar
   var vPass=req.body.pass;
   var vSex="";
-  if( vRadiofemale=="ON")
+
+  if( vRadiomale=="on")
   vSex="Male";
   else
   sex="Female";
-  var vId=start;
+  var vId=start.toString();
+  // var vId=id.toString();
+  vId="v"+vId;
+
   start=start+1;
+  // vId="v"+parseString(start);
+  // parse
+  console.log(vId);
+
 
   // find();
   // async function find(){
@@ -345,9 +524,9 @@ app.post("/signup",function(req,res)
  //  });
  //
  // visitor.save();
-console.log(start);
-
- Visitor.register({
+// console.log(start);
+// res.send("R");
+ User.register({
    name: vName,
    sex: vSex,
    address: vAddress,
@@ -355,18 +534,20 @@ console.log(start);
    mobile: vMobile,
    aadhar: vAadhar,
    username:vId,
-   status: "active"},
+   status: "active",
+   forgetPass:undefined},
    vPass,
    function(err,user){
      if(err)
      {
        console.log(err);
-       res.redirect("/register");
+       res.redirect("/signup");
      }
      else{
-       passport.authenticate("local")(req,res,function(){
+       passport.authenticate("localhost")(req,res,function(){
          // res.redirect("/home");
-         res.send("AUTHENTICATED");
+         // res.send("AUTHENTICATED");
+         res.redirect("/profile");
        })
      }
    }
@@ -411,9 +592,9 @@ app.post("/search_visitor",function(req,res){
   console.log(username);
   console.log(req.user.name);
 
-  username=username.slice(1,username.length);
-  console.log(username);
-  Visitor.findOne({username:username},function(err,user){
+  // username=username.slice(1,username.length);
+  // console.log(username);
+  User.findOne({username:username},function(err,user){
     if(err)
     {
       console.log(err)
@@ -421,7 +602,7 @@ app.post("/search_visitor",function(req,res){
     else{
       if(user)
       {
-          Visitor.find({},function(err,check){
+          User.find({username:{ $regex: /^v/ }},function(err,check){
           if(err)
           console.log(err);
           else{
@@ -432,7 +613,7 @@ app.post("/search_visitor",function(req,res){
         })
       }
       else{
-        Visitor.find({},function(err,check){
+        User.find({username:{ $regex: /^v/ }},function(err,check){
           if(err)
           console.log(err);
           else{
@@ -447,7 +628,7 @@ app.post("/search_visitor",function(req,res){
                   "password":"",
                   "status":""
                 };
-                Visitor.find({},function(err,check){
+                User.find({username:{ $regex: /^v/ }},function(err,check){
                   if(err)
                   console.log(err);
                   else{
@@ -465,20 +646,231 @@ app.post("/search_visitor",function(req,res){
   })
 });
 
-// app.get("/modifyVisitorDetails",function(req,res)
-// {
-//     var vId=req.body.user_id;
-//     search();
-//     async function search(){
-//       await Visior.findOne({username:vId},function(err,check){
-//         if(err)
-//         console.log(err);
-//         else{
-//           res.render("admin_profile.ejs",{})
-//         }
-//       })
-//     }
-// });
+app.post("/del_visitor",function(req,res){
+  var username=req.body.username;
+  console.log(username);
+  console.log(req.user.name);
+
+  // username=username.slice(1,username.length);
+  // console.log(username);
+  User.findOne({username:username},function(err,user){
+    if(err)
+    {
+      console.log(err)
+    }
+    else{
+      if(user)
+      {
+          User.deleteOne({username:req.body.username},function(){
+                User.find({username:{ $regex: /^v/ }},function(err,check){
+                if(err)
+                console.log(err);
+                else{
+                  // console.log(user.email);
+                  user={
+                    "name":"",
+                    "sex":"",
+                    "username":"",
+                    "address":"",
+                    "email":"",
+                    "mobile":"",
+                    "aadhar":"",
+                    "password":"",
+                    "status":""
+                  };
+                  res.render("admin_profile.ejs",{Admin_Name:req.user.name,details:check,visitor:user});
+                  // res.redirect("/");
+                }
+              })
+          });
+      }
+      else{
+
+        //USER DOES NPT EXIST MESSAGE
+        User.find({username:{ $regex: /^v/ }},function(err,check){
+          if(err)
+          console.log(err);
+          else{
+                user={
+                  "name":"",
+                  "sex":"",
+                  "username":"NOT A VALID ID",
+                  "address":"",
+                  "email":"",
+                  "mobile":"",
+                  "aadhar":"",
+                  "password":"",
+                  "status":""
+                };
+                User.find({username:{ $regex: /^v/ }},function(err,check){
+                  if(err)
+                  console.log(err);
+                  else{
+                      res.render("admin_profile.ejs",{Admin_Name:req.user.name,details:check,visitor:user});
+                      // res.alert("NOT VALID ID")
+                  }
+                });
+                // res.alert("Enter valid id");
+
+              }
+            })
+      }
+
+    }
+  })
+});
+
+app.post("/visitor_update_by_admin",function(req,res){
+  var username=req.body.username;
+  console.log(username);
+  console.log(req.user.name);
+
+  // username=username.slice(1,username.length);
+  // console.log(username);
+  User.findOne({username:username},function(err,user){
+    if(err)
+    {
+      console.log(err)
+    }
+    else{
+      if(user)
+      {
+          User.updateOne({username:req.body.username},{name:req.body.name,email:req.body.email,mobile:req.body.mobile,address:req.body.address,staus:req.body.status},function(){
+                User.find({username:{ $regex: /^v/ }},function(err,check){
+                if(err)
+                console.log(err);
+                else{
+                  // console.log(user.email);
+                  user={
+                    "name":"",
+                    "sex":"",
+                    "username":"",
+                    "address":"",
+                    "email":"",
+                    "mobile":"",
+                    "aadhar":"",
+                    "password":"",
+                    "status":""
+                  };
+                  res.render("admin_profile.ejs",{Admin_Name:req.user.name,details:check,visitor:user});
+                  // res.redirect("/");
+                }
+              })
+          });
+      }
+      else{
+
+        //USER DOES NPT EXIST MESSAGE
+        User.find({username:{ $regex: /^v/ }},function(err,check){
+          if(err)
+          console.log(err);
+          else{
+                user={
+                  "name":"",
+                  "sex":"",
+                  "username":"NOT A VALID ID",
+                  "address":"",
+                  "email":"",
+                  "mobile":"",
+                  "aadhar":"",
+                  "password":"",
+                  "status":""
+                };
+                User.find({username:{ $regex: /^v/ }},function(err,check){
+                  if(err)
+                  console.log(err);
+                  else{
+                      res.render("admin_profile.ejs",{Admin_Name:req.user.name,details:check,visitor:user});
+                      // res.alert("NOT VALID ID")
+                  }
+                });
+                // res.alert("Enter valid id");
+
+              }
+            })
+      }
+
+    }
+  })
+});
+
+app.post("/forgetPass",function(req,res){
+  var username=req.body.username;
+  console.log(username);
+  var buf = crypto.randomBytes(20);
+  var token=buf.toString('hex');
+  // console.log(buf.toString('hex'));
+  find();
+  async function find()
+  {
+    await User.findOne({username:username},function(err,user){
+      if(err)
+      console.log(err);
+      else{
+        if(user){
+          User.updateOne({username:username},{forgetPass:token},function(err,check){
+            if(err)
+            console.log(err)
+            else{
+              var transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                  user: 'vms.sasy@gmail.com',
+                  pass: 'sasy2019'
+                }
+              });
+              var link="http://localhost:3000/reset/"+token;
+              var mailOptions = {
+                from: 'vms.sasy@gmail.com',
+                to: user.email,
+                subject: 'Reset Password',
+                text: 'Someone has requested to reset your VMS password.\nIf the request is done by you, then tap on the following link to reset your password:\n'+link,
+                // attachments:[{
+                //   path:__dirname+'/website-design-ideas-start-with-grayscale-768x530.jpg',
+                //   // path:__dirname+'/'
+                // }]
+              };
+
+              transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                  console.log(error);
+                } else {
+                  console.log('Email sent: ' + info.response);
+                  res.redirect(".login");
+                }
+              });
+
+              // return;
+            }
+          });
+
+        }
+        else{
+          res.send("USER NOT FOUND");
+          // setTimeout()
+        }
+      }
+    })
+  }
+
+});
+
+app.post("/resetPass",function(req,res){
+
+  var username=console.log(req.body.username);
+  var newPass=console.log(req.body.pass);
+  User.updateOne({username:username},{password:newPass, forgetPass:undefined},function(err){
+    if(err)
+    console.log(err);
+    else
+    res.send("PASS CHANGED");
+
+  })
+
+});
+
+
+
 
 
 

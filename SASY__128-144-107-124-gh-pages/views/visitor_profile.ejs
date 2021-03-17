@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <title>Admin Profile</title>
+    <title>Visitor Profile</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;500&display=swap" rel="stylesheet">
@@ -43,21 +43,19 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
+   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+     <div class="navbar-nav">
 
-        <a class="nav-item nav-link navbar-ic-position"  href="logout">Logout</a>
-        <a class="nav-item nav-link navbar-ic-position"  href="signup">Register New Visitor</a>
-
-        </div>
-
-      </div>
- <!--   <div class="navbar-nav">
+       <a class="nav-item nav-link navbar-ic-position"  href="logout">Logout</a>
 
 
-        <a onclick="checkfunc();" class="nav-item nav-link navbar-ic-position active" id="head-color"  href="admin_profile.html">check and monitor</a>
+       </div>
+
+     </div>
 
 
+
+ <!--
 
        <a  onclick="change_detail_func();" class="nav-item nav-link  navbar-ic-position " id="head-color" href="">change details</a>
 
@@ -65,14 +63,16 @@
 
 
     <a onclick="deactivatefunc();"  class="nav-item nav-link navbar-ic-position " id="head-color" href="">deactivate</a>
+   -->
 
-    </div> -->
+
+    </div>
   </div>
 </nav>
 </div>
   </header>
 
-  <h1 style="text-align: right;  margin: auto;padding: 10px; "><%=Admin_Name%> </h1>
+  <h1 style="text-align: right;  margin: auto;padding: 10px; "><%= Visitor_Name %></h1>
 
 
 
@@ -80,20 +80,11 @@
 
 <div class="container" id="head-color">
 
-<form action="search_visitor" method="post">
-
-  <div class="input-group mb-3 container">
-  <input name="username" id="user_id_input" type="text" class="form-control" placeholder="User_id" aria-label="User_id" aria-describedby="basic-addon2">
-  <div class="input-group-append">
-    <button formmethod="post" formaction="search_visitor" onclick="" class="btn btn-md btn-outline-secondary ">Search</button>
-  </div>
-
-</form>
-</div>
 
 
-  <form >
-    <p style="font-size: 40px">Visitor Details</p>
+
+
+  <form>
 
     <div class="form-group">
       <label for="visitor_id">visitor_id</label>
@@ -126,12 +117,6 @@
    </div>
 
    <div class="form-group">
-    <label for="status">card status</label>
-    <input name="status" type="text" class="form-control" id="address" value="<%= visitor.status %>">
-  </div>
-
-
-   <div class="form-group">
     <label for="exampleInputEmail1">duration of stay</label>
 
   <div class="input-group">
@@ -141,19 +126,13 @@
 </div>
 
 
-<div class="input-group mb-3">
-  <input type="datetime-local" class="form-control">
-  <div class="input-group-append">
-    <button onclick="extend_admin();" class="btn btn-outline-secondary" type="button">Extend</button>
-  </div>
-</div>
+
 
   </form>
 
 <div class="row">
     <div class="col-sm-12 text-center">
-        <button formaction="visitor_update_by_admin" formmethod="post" onclick="" class="btn btn-primary btn-md">Update</button>
-        <button formaction="del_visitor" formmethod="post" onclick="" class="btn btn-primary btn-md">Deactivate</button>
+        <button  onclick="" class="btn btn-primary btn-md">Get Card</button>
      </div>
 </div>
 
@@ -182,44 +161,8 @@
 
 
 
-<div class="">
-   <table class="table container">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">S No.</th>
-      <th scope="col">user_id</th>
-      <th scope="col">name</th>
-      <th scope="col">sex</th>
-      <th scope="col">email_id</th>
-      <th scope="col">mobile</th>
-      <th scope="col">address</th>
-      <th scope="col">visiting time</th>
-      <th scope="col">leaving time</th>
 
-    </tr>
-  </thead>
-  <tbody>
-    <!-- console.log(details.length); -->
-<% for (var i =0; i <details.length;  i++ ) { %>
-          <tr scope="row">
-            <td><%= i+1 %></td>
-            <td>v <%= details[i].username %> </td>
-            <td><%= details[i].name %></td>
-            <td><%= details[i].sex %></td>
-            <td><%= details[i].email %></td>
-            <td><%= details[i].mobile %></td>
-            <td><%= details[i].address %></td>
-            <!-- <td></td>
-            <td></td>  -->
 
-            </tr>
-
-<% } %>
-
-  </tbody>
-</table>
-
-</div>
 
 
    <script src="js/jquery-3.5.1.min.js"></script>
