@@ -27,24 +27,28 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 mongoose.connect("mongodb://localhost:27017/todo",{useNewUrlParser:true, useUnifiedTopology: true });
-
-const adminsSchema=new mongoose.Schema ({
-  name:String,
-  username:String,
-  password:String
+mongoose.set("useCreateIndex", true);
+const connection = mongoose.connection;
+connection.once('open', () => {
+    console.log("MongoDB database connection established successfully");
 });
+// const adminsSchema=new mongoose.Schema ({
+//   name:String,
+//   username:String,
+//   password:String
+// });
 
-const visitorsSchema=new mongoose.Schema ({
-  name:String,
-  sex:String,
-  username:String,
-  address:String,
-  email:String,
-  mobile:String,
-  aadhar:String,
-  password:String,
-  status:String
-});
+// const visitorsSchema=new mongoose.Schema ({
+//   name:String,
+//   sex:String,
+//   username:String,
+//   address:String,
+//   email:String,
+//   mobile:String,
+//   aadhar:String,
+//   password:String,
+//   status:String
+// });
 
 const usersSchema=new mongoose.Schema({
   username:String,
@@ -56,24 +60,31 @@ const usersSchema=new mongoose.Schema({
   mobile:String,
   aadhar:String,
   status:String,
-  forgetPass:String,
+  forgetPass:String
 })
 
-adminsSchema.plugin(passportLocalMongoose);
-visitorsSchema.plugin(passportLocalMongoose);
+// adminsSchema.plugin(passportLocalMongoose);
+// visitorsSchema.plugin(passportLocalMongoose);
 usersSchema.plugin(passportLocalMongoose);
 
-const Admin=mongoose.model("Admin",adminsSchema);
-const Visitor=mongoose.model("Visitor",visitorsSchema);
-const User=mongoose.model("User",usersSchema);
+// const Admin=mongoose.model("Admin",adminsSchema);
+// const Visitor=mongoose.model("Visitor",visitorsSchema);
+const User=new mongoose.model("User",usersSchema);
 
 passport.use(User.createStrategy());
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-//
-// passport.use(Visitor.createStrategy());
-// passport.serializeUser(Visitor.serializeUser());
-// passport.deserializeUser(Visitor.deserializeUser());
+
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
+// //
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
 
 var start=1000001;
 
@@ -88,7 +99,19 @@ async function findVisitor(){
       if(check.length>0)
       {
         var username=check[check.length-1].username.slice(1,check[check.length-1].username.length);
-        start=Number(username)+1;
+        var max=1000001;
+        for(var i=0;i<check.length;i++)
+        {
+          console.log(max);
+
+          var name=check[i].username.slice(1,check[i].username.length);
+          var x=Number(name);
+
+          if(x>max)
+          max=x;
+        }
+        console.log(max);
+        start=max+1;
         console.log("Visitors Stored");
         console.log(check);
       }
@@ -139,32 +162,11 @@ console.log(start);
 //         // res.redirect("admin_profile");
 //       }
 //     }
-//     User.register({
-//       name: "YSK",
-//       username: "a1000003",
-//       sex:"Male",
-//       address:"",
-//       email:"",
-//       mobile:"",
-//       aadhar:"",
-//       status:"",
-//       forgetPass:undefined,
-//     },
-//       "y",
-//       function(err,user){
-//         if(err)
-//         {
-//           console.log(err);
-//           // res.redirect("/register");
-//         }
-//         else{
-//           // passport.authenticate("local")(req,res,function(){
-//             console.log("User registered");
-//             // res.redirect("admin_profile");
-//           }
-//         }
-//
-// );
+// User.register({username: "ayash123"}, "ysk", (err, user) => {
+//   if(err){
+//       console.log(err);
+//   }
+// });
 
 app.get("/",function(req,res){
   res.sendFile(__dirname+"/home.html");
@@ -337,134 +339,63 @@ app.get("/profile",function(req,res){
 
 app.post("/login",function(req,res)
 {
-  var email=req.body.myemail;
+  var email=req.body.username;
   var pass=req.body.password;
   var x=0;
 
   var b=email[0];
   // email=email.slice(1,email.length);
-  console.log(email);
-  console.log(pass);
+  // console.log(email);
+  // console.log(pass);
   if(b=="a")
   {
-    // console.log(pass);
     const user= new User({
-      username:email,
-      password:pass
+      username:req.body.username,
+      password:req.body.password
     });
-    console.log("admin id");
     req.login(user,function(err){
       if(err)
       {
         console.log(err);
       }
       else{
-          passport.authenticate('localhost')(req,res,function(){
+            passport.authenticate('local',{ successRedirect: '/admin_profile',
+                                   failureRedirect: '/login' })(req,res,function(){
             res.redirect("/admin_profile");
-          console.log("HII admin");
+            res.status(200).json({
+              message:"Successfully Authenticated"
+            });
+
         })
       }
     })
   }
   else if(b=="v")
   {
-
     const user= new User({
-      username:email,
-      password:pass
+      username:req.body.username,
+      password:req.body.password
     });
-    console.log("visitor id");
     req.login(user,function(err){
       if(err)
       {
         console.log(err);
       }
       else{
-            passport.authenticate('localhost')(req,res,function(){
+          passport.authenticate('local',{ successRedirect: '/visitor_profile',
+                                 failureRedirect: '/login' })(req,res,function(){
             res.redirect("/visitor_profile");
-            console.log("Hiii visitor");
+            res.status(200).json({
+              message:"Successfully Authenticated"
+            });
+
         })
       }
     })
   }
-
-//   if(b=="a")
-//   findAdmin();
-//   else if(b=="v")
-//   findVisitor();
-//
-//
-//   //Search in admin table
-//   async function findAdmin(){
-//    Admin.findOne({username:email},function(err,check){
-//     if(err)
-//     {
-//       console.log(err);
-//     }
-//     else{
-//       if(check)
-//       {
-//         if(check.pass==pass)
-//         {
-//           Visitor.find({},function(err,detail){
-//             if(err)
-//             {
-//               console.log(err);
-//               return;
-//             }
-//             else{
-//               res.render("admin_profile.ejs",{Admin_Name:check.name, details:detail,id:"abc@abc.com"});
-//               return;
-//             }
-//           })
-//
-//         }
-//         else
-//         {
-//           res.send("Invalid pass");
-//           return;
-//         }
-//       }
-//       else
-//       {
-//         res.send("Invalid ID");
-//         return;
-//       }
-//     }
-//   })
-// }
-//
-//
-// //Search in visitor table
-// async function findVisitor(){
-//   await Visitor.findOne({username:email},function(err,check){
-//     if(err)
-//     {
-//       console.log(err);
-//     }
-//     else{
-//       if(check)
-//       {
-//         if(check.pass==pass && check.status=="active")
-//         {
-//           res.send("Login Success");
-//           return;
-//         }
-//         else
-//         {
-//           res.send("Invalid pass");
-//           return;
-//         }
-//       }
-//       else
-//       {
-//         res.send("Invalid ID");
-//         return;
-//       }
-//     }
-//   })
-// }
-
+  else{
+    res.redirect("/login");
+  }
 });
 
 app.post("/signup",function(req,res)
@@ -492,97 +423,67 @@ app.post("/signup",function(req,res)
   // parse
   console.log(vId);
 
+  User.register({username:vId}, vPass, (err, user) => {
+    if(err){
+        console.log(err);
+    }
+    else
+    {
+      // Sending email
+      User.updateOne({username:vId},{
+        name: vName,
+        sex: vSex,
+        address: vAddress,
+        email: vEmail,
+        mobile: vMobile,
+        aadhar: vAadhar,
+        status: "active",
+        forgetPass:undefined
+      },function(err,check){
+        if(err)
+        console.log(err);
+        else{
+          console.log("UPDATED")
+          var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: 'vms.sasy@gmail.com',
+              pass: 'sasy2019'
+            }
+          });
 
-  // find();
-  // async function find(){
-  //
-  //   // db.demo141.find().sort({_id:-1}).limit(1);
-  // await  Visitor.find({},function(err,check).sort({id:-1}).limit(1){
-  //     if(err)
-  //     {
-  //       console.log(err);
-  //     }
-  //     else{
-  //       if(check)
-  //       {
-  //         vId=check.id+1;
-  //       }
-  //     }
-  //   })
-  // }
+          var mailOptions = {
+            from: 'vms.sasy@gmail.com',
+            to: vEmail,
+            subject: 'Registration on VMS',
+            text: 'Thanks for registration',
+            attachments:[{
+              path:__dirname+'/website-design-ideas-start-with-grayscale-768x530.jpg',
+              // path:__dirname+'/'
+            }]
+          };
 
- //  const visitor=new Visitor({
- //    name: vName,
- //    sex: vSex,
- //    address: vAddress,
- //    email: vEmail,
- //    mobile: vMobile,
- //    aadhar: vAadhar,
- //    id:vId,
- //    pass: vPass,
- //    status: "active"
- //  });
- //
- // visitor.save();
-// console.log(start);
-// res.send("R");
- User.register({
-   name: vName,
-   sex: vSex,
-   address: vAddress,
-   email: vEmail,
-   mobile: vMobile,
-   aadhar: vAadhar,
-   username:vId,
-   status: "active",
-   forgetPass:undefined},
-   vPass,
-   function(err,user){
-     if(err)
-     {
-       console.log(err);
-       res.redirect("/signup");
-     }
-     else{
-       passport.authenticate("localhost")(req,res,function(){
-         // res.redirect("/home");
-         // res.send("AUTHENTICATED");
-         res.redirect("/profile");
-       })
-     }
-   }
- );
+          transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Email sent: ' + info.response);
+            }
+          });
 
- // Sending email
- // var transporter = nodemailer.createTransport({
- //   service: 'gmail',
- //   auth: {
- //     user: 'vms.sasy@gmail.com',
- //     pass: 'sasy2019'
- //   }
- // });
- //
- // var mailOptions = {
- //   from: 'vms.sasy@gmail.com',
- //   to: vEmail,
- //   subject: 'Registration on VMS',
- //   text: 'Thanks for registration',
- //   attachments:[{
- //     path:__dirname+'/website-design-ideas-start-with-grayscale-768x530.jpg',
- //     // path:__dirname+'/'
- //   }]
- // };
- //
- // transporter.sendMail(mailOptions, function(error, info){
- //   if (error) {
- //     console.log(error);
- //   } else {
- //     console.log('Email sent: ' + info.response);
- //   }
- // });
- //
- //
- // res.send("Registration Success Proceed to login. Your id is: "+vId);
+          res.send("Registration Success Proceed to login. Your id is: "+vId);
+
+        }
+      });
+
+
+      // passport.authenticate("local")(req,res,function(){
+      //   // res.redirect("/home");
+      //   // res.send("AUTHENTICATED");
+      //   res.redirect("/profile");
+      // })
+    }
+  });
 
   // res.redirect("/");
 });
@@ -808,6 +709,7 @@ app.post("/forgetPass",function(req,res){
       console.log(err);
       else{
         if(user){
+          console.log(user);
           User.updateOne({username:username},{forgetPass:token},function(err,check){
             if(err)
             console.log(err)
@@ -824,7 +726,7 @@ app.post("/forgetPass",function(req,res){
                 from: 'vms.sasy@gmail.com',
                 to: user.email,
                 subject: 'Reset Password',
-                text: 'Someone has requested to reset your VMS password.\nIf the request is done by you, then tap on the following link to reset your password:\n'+link,
+                text: 'Someone has requested to reset your VMS password.\nIf the request is done by you, then tap on the following link to reset your password:\n'+link
                 // attachments:[{
                 //   path:__dirname+'/website-design-ideas-start-with-grayscale-768x530.jpg',
                 //   // path:__dirname+'/'
@@ -836,7 +738,7 @@ app.post("/forgetPass",function(req,res){
                   console.log(error);
                 } else {
                   console.log('Email sent: ' + info.response);
-                  res.redirect(".login");
+                  res.redirect("/login");
                 }
               });
 
@@ -857,15 +759,107 @@ app.post("/forgetPass",function(req,res){
 
 app.post("/resetPass",function(req,res){
 
-  var username=console.log(req.body.username);
-  var newPass=console.log(req.body.pass);
-  User.updateOne({username:username},{password:newPass, forgetPass:undefined},function(err){
+console.log(req.body.username);
+console.log(req.body.password);
+  var user = new User({username: req.body.username});
+  user.setPassword(req.body.password,function(err,user){
     if(err)
     console.log(err);
-    else
-    res.send("PASS CHANGED");
+    else{
+      user.save(function(err)
+    {
+      if(err)
+      console.log(err);
+      else{
+          User.findOne({username:req.body.username},function(err,check){
+            if(err)
+            console.log(err)
+            else{
+              var vName=check.name;
+              var vAddress=check.address;
+              var vEmail=check.email;
+              var vMobile=check.mobile;
+              var vAadhar=check.aadhar
+              var vSex=check.sex;
+              var vStatus=check.status;
+
+              User.deleteOne({username:req.body.username},function(err){
+                if(err)
+                console.log(err);
+                else{
+                  User.updateOne({username:req.body.username},{
+                    name: vName,
+                    sex: vSex,
+                    address: vAddress,
+                    email: vEmail,
+                    mobile: vMobile,
+                    aadhar: vAadhar,
+                    status: vStatus,
+                    forgetPass:undefined
+                  },function(err){
+                    if(err)
+                    console.log(err);
+                    else{
+                      res.send("PASSWORD CHANGED");
+                    }
+                  })
+                }
+              })
+
+            }
+          })
+      }
+    });
+
+    }
 
   })
+// {
+//   if(err)
+//   console.log(err);
+//   else
+//   user.(function(err));
+//   {
+//     if(err)
+//     console.log(err);
+//     else{
+//       res.send(user);
+//     }
+//   }
+// });
+//   console.log(req.body.username);
+
+
+  // User.setPassword(user,req.body.password);
+
+  // fun()
+  // async function fun(){
+  //
+  //   await User.find({username:req.body.username},function(err,user){
+  //     if(err)
+  //     console.log(err);
+  //     else{
+  //       user.setPassword(req.body.password);
+  //       // user.save();
+  //       // User.updateOne({username:req.body.username},{password:user.body.password});
+  //     }
+  //   })
+  // }
+  // User.setPassword({username:req.body.username},req.body.password);
+// User.setPassword()
+
+
+
+  // await user.save();
+  // var username=console.log(req.body.username);
+  // var newPass=console.log(req.body.pass);
+  // User.setP({username:username},{password:newPass, forgetPass:undefined},function(err){
+  //   if(err)
+  //   console.log(err);
+  //   else
+
+
+  // })
 
 });
 
