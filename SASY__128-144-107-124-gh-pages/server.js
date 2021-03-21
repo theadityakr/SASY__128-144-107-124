@@ -11,7 +11,7 @@ const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
 const crypto = require('crypto');
 
-const app =express();
+const app=express();
 
 app.use(express.static("public"));
 app.set("view-engine","ejs");
@@ -61,7 +61,7 @@ const usersSchema=new mongoose.Schema({
   aadhar:String,
   status:String,
   forgetPass:String
-})
+});
 
 // adminsSchema.plugin(passportLocalMongoose);
 // visitorsSchema.plugin(passportLocalMongoose);
@@ -91,6 +91,7 @@ var start=1000001;
 findVisitor();
 async function findVisitor(){
   await User.find({username:{ $regex: /^v/ }},function(err,check){
+
     if(err)
     {
       console.log(err);
@@ -103,10 +104,10 @@ async function findVisitor(){
         for(var i=0;i<check.length;i++)
         {
           console.log(max);
-
+          
           var name=check[i].username.slice(1,check[i].username.length);
           var x=Number(name);
-
+          
           if(x>max)
           max=x;
         }
@@ -300,7 +301,7 @@ app.get("/visitor_profile",function(req,res){
             console.log(err);
           }
           else{
-              res.render("visitor_profile.ejs",{Visitor_Name:user.name,visitor:user});
+              res.render("visitor_profile.ejs",{Visitor_Name:username,visitor:user});
         }
         })
       };
@@ -694,6 +695,51 @@ app.post("/visitor_update_by_admin",function(req,res){
     }
   })
 });
+
+
+app.post("/visitor_update_by_visitor",function(req,res){
+  var username=req.body.username;
+  console.log(username);  //v1000001
+  console.log(req.user.name); //Saloni
+
+  User.findOne({username:username},function(err,user){
+    if(err)
+    {
+      console.log(err)
+    }
+    else{
+      if(user)
+      {
+          User.updateOne({username:req.body.username},{name:req.body.name,email:req.body.email,mobile:req.body.mobile,address:req.body.address},function(){
+                User.find({username:{ $regex: /^v/ }},function(err,check){
+                if(err)
+                console.log(err);
+                else{
+                  // console.log(user.email);
+                  user={
+                    "name":req.body.name,
+                    "sex":req.body.sex,
+                    "username":req.body.username,
+                    "address":req.body.address,
+                    "email":req.body.email,
+                    "mobile":req.body.mobile,
+                    "aadhar":req.body.aadhar,
+                    "password":"",
+                    "status":""
+                  };
+                  res.render("visitor_profile.ejs",{Visitor_Name:req.user.name,visitor:user});
+                  // res.redirect("/");
+                }
+              })
+          });
+      }
+      
+
+    }
+  })
+});
+
+
 
 app.post("/forgetPass",function(req,res){
   var username=req.body.username;
