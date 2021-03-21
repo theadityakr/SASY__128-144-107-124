@@ -1,4 +1,6 @@
 body {
+  background-image: url('resources/home.jpg');
+background-position: center;
   font-size: 16px;
   color: #fff;
   background-color: #f6f6f6;
@@ -87,6 +89,15 @@ opacity: 1;}
   background-color: #878787;
 
 }
+.content {
+  
+position: fixed;
+  top: 0px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  width: 100%;
+  padding: 20px;
+}
 .lead {
   font-size: 1rem;
   margin-left:25px;margin-right:25px;
@@ -95,9 +106,9 @@ opacity: 1;}
 }
 
 
-#home-tile , #Feature-tile, #Pricing-tile {
+#admin-tile , #visitor-tile {
 background-color: red;
-  height: 400px;
+  height: 220px;
   width: 100%;
 
   margin-bottom: 15px;
@@ -107,21 +118,24 @@ background-color: red;
 
 
 }
-#home-tile:hover, #Feature-tile:hover, #Pricing-tile:hover {
-
-  box-shadow: 0 1px 5px 1px #878787;
+#admin-tile:hover{  
+background-image: url('resources/home_admin_background.png');
+  box-shadow: 0 1px 5px 1px white;
 }
-
-#home-tile{
-  background: url('../images/menu-tile.jpg') no-repeat;
+#visitor-tile:hover{
+background-image: url('resources/home_visitor_background.png');
+box-shadow: 0 1px 5px 1px white;
+}
+#admin-tile{
+ 
   background-position: center;
 }
-#Feature-tile {
+#visitor-tile {
   background: url('../images/specials-tile.jpg') no-repeat;
   background-position: center;
 }
 
-#home-tile span, #Feature-tile span, #Pricing-tile span {
+#admin-tile span, #visitor-tile span, #Pricing-tile span {
 position: absolute;
 top:0;
 right: 0;
@@ -131,7 +145,7 @@ right: 0;
   text-transform: lowercase;
   font-weight: 500;
   color: #141414;
-  margin-top: 200px;
+  margin-top: 100px;
 
 }
 
@@ -157,7 +171,7 @@ right: 0;
 }
 
 
-#home-tile , #Feature-tile, #Pricing-tile {
+#admin-tile , #visitor-tile, #Pricing-tile {
 background-color: white;}
 
 
@@ -175,7 +189,7 @@ background-color: white;}
   border-color: black;}
 
 #tile-margi{
-margin-top: -150px;
+margin-top: +500px;
 
 }
 #tile-para{
@@ -221,8 +235,8 @@ button>a:hover{
 
 .panel-footer{
 margin-top: 40px;
-	color: white;
-	background-color: #878787;
+	 background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
 	margin-bottom: 5px;
 	padding-top: 10px;padding-bottom: 5px;
 }
