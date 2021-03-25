@@ -1,5 +1,5 @@
 body {
-  background-image: url('resources/home.jpg');
+  background-image: url('/resources/home.jpg');
 background-position: center;
   font-size: 16px;
   color: #fff;
@@ -90,7 +90,7 @@ opacity: 1;}
 
 }
 .content {
-  
+
 position: fixed;
   top: 0px;
   background: rgba(0, 0, 0, 0.5);
@@ -118,16 +118,16 @@ background-color: red;
 
 
 }
-#admin-tile:hover{  
-background-image: url('resources/home_admin_background.png');
+#admin-tile:hover{
+background-image: url('/resources/home_admin_background.png');
   box-shadow: 0 1px 5px 1px white;
 }
 #visitor-tile:hover{
-background-image: url('resources/home_visitor_background.png');
+background-image: url('/resources/home_visitor_background.png');
 box-shadow: 0 1px 5px 1px white;
 }
 #admin-tile{
- 
+
   background-position: center;
 }
 #visitor-tile {

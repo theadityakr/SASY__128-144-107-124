@@ -1,20 +1,26 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <base href="/">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
     <title>signup</title>
-    <link rel="stylesheet" href="public/css/bootstrap.min.css">
-    <link rel="stylesheet" href="public/css/styles.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;500&display=swap" rel="stylesheet">
   </head>
 
 
 <body>
-
+  <%  if(message){  %>
+      <div style='text-align: center' class="alert alert-<%= message.type %>">
+        <button type="button" class="close" data-dismiss='alert'>&times;</button>
+        <strong><%= message.intro %></strong> <%= message.message %>
+      </div>
+  <%  }  %>
  <button onclick="topFunction()" id="myBtn" title="Go to top">
  <svg width="1em" height="1em" viewBox="0 0 16 18" class="bi bi-arrow-up-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
   <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -67,10 +73,10 @@
     <div class="form-group sex">
       <label class="sex">Sex:</label >
       <label class="radio-inline sex">
-        <input name="radiomale" type="radio" name="optradio" checked> Male
+        <input type="radio" name="sex" value="Male"checked> Male
       </label>
       <label class="radio-inline sex">
-        <input name="radiofemale" type="radio" name="optradio" unchecked> Female
+        <input name="sex" type="radio" value="Female" > Female
       </label>
     </div>
 
@@ -115,8 +121,10 @@
 </div>
 </section>
 
-   <script src="public/js/jquery-3.5.1.min.js"></script>
-  <script src="public/js/bootstrap.min.js"></script>
-  <script src="public/js/script.js"></script>
+   <script src="js/jquery-3.5.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/script.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </body>
 </html>

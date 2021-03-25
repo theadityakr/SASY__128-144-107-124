@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+  <base href="/">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,6 +18,12 @@
 
 
 <body>
+  <%  if(message){  %>
+      <div style='text-align: center' class="alert alert-<%= message.type %>">
+        <button type="button" class="close" data-dismiss='alert'>&times;</button>
+        <strong><%= message.intro %></strong> <%= message.message %>
+      </div>
+  <%  }  %>
 
   <button onclick="topFunction()" id="myBtn" title="Go to top">
     <svg width="1em" height="1em" viewBox="0 0 16 18" class="bi bi-arrow-up-circle" fill="currentColor"
