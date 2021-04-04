@@ -61,6 +61,10 @@ document.querySelector("#login-button").addEventListener("click",function(){
 
 })
 
+if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
+
 // document.querySelector("#login-button").addEventListener("click",function(){
 //   alert("YES");
 // });

@@ -11,13 +11,14 @@ const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
 const crypto = require('crypto');
 var flash = require('express-flash');
+var QRCode = require('qrcode')
 const app=express();
 
 app.use(express.static("public"));
 app.set("view-engine","ejs");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(session({
-  secret:"Our little secret.",
+  secret:process.env.SECRET,
   resave:false,
   saveUninitialized: false
 }));
@@ -252,7 +253,10 @@ app.get("/visitor_profile",function(req,res){
             console.log(err);
           }
           else{
-              res.render("visitor_profile.ejs",{Visitor_Name:username,visitor:user});
+               QRCode.toDataURL(req.user.username,function(err,img){
+                 res.render("visitor_profile.ejs",{Visitor_Name:username,visitor:user,qr_code:img});
+               });
+
         }
         })
       };
@@ -304,6 +308,8 @@ app.post("/login",function(req,res,next)
             passport.authenticate('local', function(err, user, info) {
             if (err) { return next(err); }
             if (!user) { return res.render('login.ejs',{message:req.session.message}); }
+            if(user.status=="Inactive") { return res.render('login.ejs',{message:req.session.message}); }
+
             req.logIn(user, function(err) {
               if (err) { return next(err); }
               return res.redirect('/profile');
@@ -355,7 +361,7 @@ app.post("/signup",function(req,res)
         if(err)
         console.log(err);
         else{
-          console.log("UPDATED")
+          // console.log("UPDATED")
           var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -364,31 +370,37 @@ app.post("/signup",function(req,res)
             }
           });
 
-          var mailOptions = {
-            from: 'vms.sasy@gmail.com',
-            to: vEmail,
-            subject: 'Registration on VMS',
-            text: 'Thanks for registration',
-            attachments:[{
-              path:__dirname+'/website-design-ideas-start-with-grayscale-768x530.jpg',
-              // path:__dirname+'/'
-            }]
-          };
 
-          transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
-              console.log(error);
-            } else {
-              console.log('Email sent: ' + info.response);
+            QRCode.toDataURL(vId,function(err,img){
+
+
+            var mailOptions = {
+              from: 'vms.sasy@gmail.com',
+              to: vEmail,
+              subject: 'Registration on VMS',
+              // text: 'Thanks for registration',
+              attachDataUrls: true,
+              html:'<img src="'+img+'">'
+              // attachments:[{
+              //   path:__dirname+'/website-design-ideas-start-with-grayscale-768x530.jpg',
+              //   // path:__dirname+'/'
+              // }]
+            };
+
+            transporter.sendMail(mailOptions, function(error, info){
+              if (error) {
+                console.log(error);
+              } else {
+                console.log('Email sent: ' + info.response);
+              }
+            });
+            req.session.message={
+              type:'success',
+              intro:'Registration Success',
+              message:'Visitor registered successfully'
             }
-          });
-          req.session.message={
-            type:'success',
-            intro:'Registration Success',
-            message:'Visitor registered successfully'
-          }
-          res.render("signup.ejs",{message:req.session.message});
-
+            res.render("signup.ejs",{message:req.session.message});
+          })
         }
       });
 
@@ -822,6 +834,6 @@ console.log(req.body.password);
   })
 });
 
-app.listen(3000,function(){
+app.listen( process.env.PORT || 3000,function(){
   console.log("server started on port 3000");
 });
