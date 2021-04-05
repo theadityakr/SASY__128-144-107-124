@@ -1,9 +1,8 @@
 body {
-  background-image: url('/resources/home.jpg');
-background-position: center;
+   background-image: linear-gradient(to bottom right, purple, lightblue);
   font-size: 16px;
-  color: #fff;
-  background-color: #f6f6f6;
+  color: white;
+ 
   font-family: 'Raleway', sans-serif;
   /* text-transform: lowercase; */
 }
@@ -17,7 +16,34 @@ font-family: 'Raleway', sans-serif;
   /* text-transform: lowercase; */
 }
 .bg-light {
-  background-color: #f6f6f6!important;
+   background-color: rgba(0, 0, 0, 0.5)!important;
+  color: rgba(0, 0, 0, 0.5)!important;
+}
+
+
+.form-control {
+  display: block;
+  width: 100% !important;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+
+
+#head-color{
+padding-left: auto;
+padding-right: auto; 
+  background-color: rgba(0, 0, 0, 0.5)!important;
+  color: white!important;
 }
 
   #myBtn {
@@ -37,7 +63,7 @@ font-family: 'Raleway', sans-serif;
 opacity: 1;}
 
 .currentColor{
-	color: #878787; !important
+	color: #878787;
 }
 
 #myBtn:hover {
@@ -55,7 +81,7 @@ opacity: 1;}
 
 }
 
-#head-color{background-color: #f6f6f6;}
+
 
 #logo-img {
   background: url('Minimalistic_artwork_fusion_zometool_1920x1080.jpg') no-repeat;
@@ -152,12 +178,22 @@ right: 0;
 
 
 .container {
-  width: 100%;
-
-  padding-right: 15px;
-  padding-left: 15px;
+width: 45%;
+  padding-right: 35px;
+  padding-left: 30px;
+  padding-bottom: 30px;
   margin-right: auto;
   margin-left: auto;
+}
+@media only screen and (max-width: 1000px) {
+  .container {
+width: 100%;
+  padding-right: 35px;
+  padding-left: 30px;
+  padding-bottom: 30px;
+  margin-right: auto;
+  margin-left: auto;
+}
 }
 
 .form-container
@@ -216,7 +252,7 @@ right: 0;
 form{
 	margin-left:15px;
 	margin-top: 95px;
-	color: #141414;
+	color: white;
 }
 #upload-photo{
 	margin-top: 100px;
@@ -234,10 +270,10 @@ button>a:hover{
 }
 
 .panel-footer{
-margin-top: 40px;
+margin-top: 100px;
 	 background: rgba(0, 0, 0, 0.5);
   color: #f1f1f1;
-	margin-bottom: 5px;
+	margin-bottom: 0px;
 	padding-top: 10px;padding-bottom: 5px;
 }
 
