@@ -1,0 +1,138 @@
+/* 9ddfd3 , ffc93c */
+body{
+    background-color: #ffffff;
+    /* #dbf6e9 ,  #edffec , #f9fcfb*/
+}
+
+/*NAVBAR*/
+.navbar-main{
+    background-color:  #31326f;
+}
+.navbar{
+    height:100px;
+}
+.responsive-navbar{
+    margin:auto 15px;
+}
+.top-header{
+    background-color: #31326f;
+}
+.logo{
+    align-items:center ;
+    display: flex;
+    color: rgb(255, 255, 255);
+}
+.logo-image{
+    padding: 5px;
+    vertical-align: middle;
+    
+}
+.logo-name{
+    vertical-align: middle;
+    margin-left: 5px;
+    font-size: 30px;
+}
+
+
+/*MAIN TEXT*/
+#main-text{
+    margin:2% auto;
+    height:600px;
+    /* background-image: url('/images/home-design.jpeg'); */
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+}
+.main-img{
+    background-image: url('/images/home-design.jpeg');
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+}
+
+.text{
+    font-family: 'Ubuntu', sans-serif;
+    /* text-align: center; */
+    color:#050220;
+    margin: auto 5%;
+    font-size: 4em;
+    width:70%;
+    padding: 20%;
+}
+a:link{
+    text-decoration: none;
+}
+
+
+
+/*FEATURES*/
+#login{
+    margin:60px auto 250px;
+}
+.align-login{
+    margin:auto;
+    padding:20px;
+    width: 70%;
+}
+.login-card{
+    background-color:#dbf6e9;
+    /* #ebe9e9 */
+    text-align: center;
+}
+.login-card:hover {
+    box-shadow: 0 0 11px rgba(33,33,33,.2);
+    background-color:#edffec;
+}
+.card-body{
+    background-color:#dbf6e9;
+}
+.admin-img{
+    background-color:#dbf6e9;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+}
+.visitor-img{
+    border-radius: 50%;
+    background-repeat: no-repeat;
+}
+.name{
+    color:#050220;
+}
+
+
+
+
+
+
+
+/*FOOTER*/
+/* .footer{
+    background-color: #050220;
+    padding:50px 100px;
+    margin:auto;
+    text-align: center;
+} */
+
+.footer-icon{
+    color: black;
+    margin: auto 3px;
+}
+
+.fa {
+    padding: 6.9px;
+    height:30px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    margin-left: 0px;
+    margin: 10px 10px;
+    border-radius: 50%;
+  }
+.copyright{
+    color: #FFFFFF;
+    margin:10px auto;
+    padding-top: 12px;
+}
+.fa:hover {
+    opacity: 0.7;
+}
