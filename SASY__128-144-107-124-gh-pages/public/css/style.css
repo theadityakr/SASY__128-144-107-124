@@ -38,13 +38,13 @@ body{
 #main-text{
     margin:2% auto;
     height:600px;
-    /* background-image: url('/images/home-design.jpeg'); */
+    /* background-image: url('/resources/home-design.jpeg'); */
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-size: cover;
 }
 .main-img{
-    background-image: url('/images/home-design.jpeg');
+    background-image: url('/resources/home-design.jpeg');
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-size: cover;
