@@ -146,17 +146,17 @@
     <label for="exampleInputEmail1">duration of stay</label>
 
   <div class="input-group">
-    <input type="text" class="form-control" placeholder="visiting time"/>
+    <input type="text" class="form-control" placeholder="visiting time" value="<%= visitor.inDate %>"/>
     <span class="input-group-addon">-</span>
-    <input type="text" class="form-control" placeholder="leaving time"/>
+    <input type="text" class="form-control" placeholder="leaving time"value= "<%= visitor.outDate %>"/>
 </div>
 
 
 <div class="input-group mb-3">
-  <input type="datetime-local" class="form-control">
+  <!-- <input type="datetime-local" class="form-control">
   <div class="input-group-append">
     <button onclick="extend_admin();" class="btn btn-outline-secondary" type="button">Extend</button>
-  </div>
+  </div> -->
 </div>
 
   </form>
@@ -223,8 +223,8 @@
             <td><%= details[i].mobile %></td>
             <td><%= details[i].address %></td>
             <td><%= details[i].status %></td>
-            <!-- <td></td>
-            <td></td>  -->
+            <td><%= details[i].inDate %></td>
+            <td><%= details[i].outDate %></td>
 
             </tr>
 
