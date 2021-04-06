@@ -49,6 +49,7 @@ const usersSchema=new mongoose.Schema({
   forgetPass:String,
   inDate:String,
   outDate:String,
+  url:String
 });
 
 usersSchema.plugin(passportLocalMongoose);
@@ -161,6 +162,7 @@ app.post("/signup",function(req,res)
   var vAadhar=req.body.aadhar
   var vPass=req.body.pass;
   var vSex=req.body.sex;
+  console.log(req.body.url);
 
   var vId=start.toString();
   // var vId=id.toString();
@@ -188,7 +190,8 @@ app.post("/signup",function(req,res)
         status: "active",
         forgetPass:undefined,
         inDate:d,
-        outDate:""
+        outDate:"",
+        url:req.body.url
       },function(err,check){
         if(err)
         console.log(err);

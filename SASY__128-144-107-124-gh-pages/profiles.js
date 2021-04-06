@@ -52,7 +52,7 @@ module.exports = function(app){
     if(req.isAuthenticated())
     {
         var username= req.user.username;
-        console.log(username);
+        console.log(req.user.url);
         findVisitor();
         async function findVisitor(){
           await User.findOne({username:username},function(err,user){

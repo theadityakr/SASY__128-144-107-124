@@ -62,13 +62,13 @@
 
 <div class="container" id="head-color">
 
-  <form action="/signup" style="margin-top: 80px" method="post">
+  <form  style="margin-top: 80px" >
 
     <p style="font-size: 40px">New User Registration</p>
 
     <div class="form-group">
       <label for="exampleName">Name</label>
-      <input name="name" type="text" class="form-control" id="exampleMobile" required>
+      <input name="name" type="text" class="form-control" id="exampleName" required>
     </div>
 
     <div class="form-group sex">
@@ -108,33 +108,30 @@
     <input name="pass" type="password" class="form-control" id="exampleInputPassword1" required>
   </div>
 
-  <div class="form-group form-check">
+
+<div class="container" style="margin-left: auto , margin-right: auto;" >
+  <button class="btn btn-primary" style="margin-bottom: 10px;" id="snap">Capture</button>
+
+ <button class="btn btn-primary" style="margin-bottom: 10px;" onclick="upload()">Upload Image</button>
+ <!-- Stream video via webcam -->
+
+ <video id="video" width=300 height=300 playsinline controls autoplay></video>
+<canvas id="canvas" width="640" height="480"></canvas>
+
+</div>
+<div class="" >
+  <input type="text" name="url" id="url" value="" hidden>
+</div>
+<div class="form-group form-check">
     <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
     <label class="form-check-label" for="exampleCheck1">Accept terms and conditions</label>
   </div>
 
-<button type="submit" class="btn btn-primary">submit</button>
+<button formaction="/signup" formmethod="post" type="submit" class="btn btn-primary">submit</button>
 
 </form>
 </div>
 </section>
-
-
-<div class="container" style="margin-left: auto , margin-right: auto;" >
-
-     <button class="btn btn-primary" style="margin-bottom: 10px;" id="snap">Capture</button>
-
-    <button class="btn btn-primary" style="margin-bottom: 10px;" onclick="uploadImage()">Upload Image</button>
-    <!-- Stream video via webcam -->
-
-    <video id="video" width=300 height=300 playsinline controls autoplay></video>
-
-<!-- Trigger canvas web API -->
- 
-
-<!-- Webcam video snapshot -->
-<canvas id="canvas" width="640" height="480"></canvas>
-</div>
 
 
 
@@ -182,39 +179,44 @@
 </body>
 
 
- <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+ <!-- <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script> -->
+  <!-- <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script> -->
+  <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-storage.js"></script>
+  <!-- <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-analytics.js"></script> -->
 
   <script>
-    var firebaseConfig = {
-      apiKey: "##your api key###",
-      authDomain: "##your auth domain##",
-      databaseURL: "##your database url##",
-      projectId: "##your project id ##",
-      storageBucket: "##your storage bucket##",
-      messagingSenderId: "##your messaging sender id##",
-      appId: "#your app id##"
+  var firebaseConfig = {
+      apiKey: "AIzaSyDnTFuV4llT49sbHJtcxGUPezfOW0CKJ0o",
+      authDomain: "vms-sem4.firebaseapp.com",
+      projectId: "vms-sem4",
+      storageBucket: "vms-sem4.appspot.com",
+      messagingSenderId: "436501438451",
+      appId: "1:436501438451:web:55861e256d915128e9fc86",
+      measurementId: "G-QTTWTF8QPG"
     };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     console.log(firebase);
 
-    function uploadImage() {
-      const ref = firebase.storage().ref();
-      const file = document.querySelector("#photo").files[0];
-      const name = +new Date() + "-" + file.name;
-      const metadata = {
-        contentType: file.type
-      };
-      const task = ref.child(name).put(file, metadata);
-      task
-        .then(snapshot => snapshot.ref.getDownloadURL())
-        .then(url => {
-          console.log(url);
-          document.querySelector("#image").src = url;
-        })
-        .catch(console.error);
-    }
+    // function uploadImage() {
+    //   const ref = firebase.storage().ref();
+    //   const file = document.querySelector("#photo").files[0];
+    //   const name = +new Date() + "-" + file.name;
+    //   const metadata = {
+    //     contentType: file.type
+    //   };
+    //   const task = ref.child(name).put(file, metadata);
+    //   task
+    //     .then(snapshot => snapshot.ref.getDownloadURL())
+    //     .then(url => {
+    //       console.log(url);
+    //       document.querySelector("#image").src = url;
+    //     })
+    //     .catch(console.error);
+    // }
+
+
 
 const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
@@ -259,18 +261,29 @@ var button = document.createElement('button')
 button.textContent = 'Upload Image'
 document.body.appendChild(button)
 
-button.onclick = function() {
-    const ref = firebase.storage().ref();
-    ref.child(new Date() + '-' + 'base64').putString(image.src, 'data_url').then(function(snapshot) {
-    console.log('Uploaded a data_url string!');
-    alert("Image Uploaded")
+});
+function upload(){
+  const ref = firebase.storage().ref();
+  const d=new Date() + '-' + 'base64';
+  var src = canvas.toDataURL();
+  ref.child(d).putString(src, 'data_url').then(function(snapshot) {
+  console.log('Uploaded a data_url string!');
+  console.log(src);
+  const storage = firebase.storage();
+  storage.ref(d).getDownloadURL()
+    .then((url) => {
+      console.log(url);
+      document.getElementById("url").value=url;
+
+    })
+  // console.log(d.getDownloadURL());
+  alert("Image Uploaded")
 });
 }
-});
   </script>
-  
-  
-  
+
+
+
 
 
 
