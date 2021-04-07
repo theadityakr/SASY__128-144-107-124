@@ -1,141 +1,142 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <base href="/">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<head>
+  <base href="/">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <title>signup</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  </head>
+  <title>signup</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 
 
-<body style="background-image: url('/resources/signup.jpg')"; >
+<body style="background-image: url('/resources/signup.jpg')" ;>
   <%  if(message){  %>
-      <div style='text-align: center' class="alert alert-<%= message.type %>">
-        <button type="button" class="close" data-dismiss='alert'>&times;</button>
-        <strong><%= message.intro %></strong> <%= message.message %>
-      </div>
+  <div style='text-align: center' class="alert alert-<%= message.type %>">
+    <button type="button" class="close" data-dismiss='alert'>&times;</button>
+    <strong><%= message.intro %></strong> <%= message.message %>
+  </div>
   <%  }  %>
- <button onclick="topFunction()" id="myBtn" title="Go to top">
- <svg width="1em" height="1em" viewBox="0 0 16 18" class="bi bi-arrow-up-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-  <path fill-rule="evenodd" d="M4.646 8.354a.5.5 0 0 0 .708 0L8 5.707l2.646 2.647a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 0 0 0 .708z"/>
-  <path fill-rule="evenodd" d="M8 11.5a.5.5 0 0 0 .5-.5V6a.5.5 0 0 0-1 0v5a.5.5 0 0 0 .5.5z"/>
-</svg>
-</button>
+  <button onclick="topFunction()" id="myBtn" title="Go to top">
+    <svg width="1em" height="1em" viewBox="0 0 16 18" class="bi bi-arrow-up-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+      <path fill-rule="evenodd" d="M4.646 8.354a.5.5 0 0 0 .708 0L8 5.707l2.646 2.647a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 0 0 0 .708z" />
+      <path fill-rule="evenodd" d="M8 11.5a.5.5 0 0 0 .5-.5V6a.5.5 0 0 0-1 0v5a.5.5 0 0 0 .5.5z" />
+    </svg>
+  </button>
 
 
   <header>
-<div class="" id="head-color">
+    <div class="" id="head-color">
 
-       <nav class="navbar navbar-expand-lg  " id="">
+      <nav class="navbar navbar-expand-lg  " id="">
 
-       <a class="navbar-brand" href="">
-    <imgsrc="/resources/logo.png" width="40" height="40" class="d-inline-block align-top" alt="" loading="lazy">
-  </a>
+        <a class="navbar-brand" href="/">
+          <img src="/resources/logo.png" width="40" height="40" class="d-inline-block align-top" alt="" loading="lazy">
+        </a>
 
-  <a class="navbar-brand" href="" id=""  style=" color: white;" >VMS</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link  navbar-ic-position " id="" href=""   style="  color: white;">Home</a>
-      <!-- <a class="nav-item nav-link navbar-ic-position"   href="login">login</a> -->
-    <!-- <a class="nav-item nav-link navbar-ic-position active"  href="signup">signup</a> -->
-        <a class="nav-item nav-link navbar-ic-position active"  href="profile"  style="  color: white;">Profile</a>
- <!-- <div><button onclick="myFunction()"class="btn btn-primary">dark mode</button></div> -->
+        <!-- <a class="navbar-brand" href="/" id=""  style=" color: white;" >VMS</a> -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link  navbar-ic-position " id="" href="" style="  color: white;">Home</a>
+            <a class="nav-item nav-link navbar-ic-position" style="  color: white;" href="logout">Logout</a>
+            <!-- <a class="nav-item nav-link navbar-ic-position active"  href="signup">signup</a> -->
+            <a class="nav-item nav-link navbar-ic-position active" href="profile" style="  color: white;">Profile</a>
+            <!-- <div><button onclick="myFunction()"class="btn btn-primary">dark mode</button></div> -->
 
+          </div>
+        </div>
+      </nav>
     </div>
-  </div>
-</nav>
-</div>
   </header>
 
-<section>
+  <section>
 
-<div class="container" id="head-color">
+    <div class="container" id="head-color">
 
-  <form  style="margin-top: 80px" >
+      <form style="margin-top: 80px">
 
-    <p style="font-size: 40px">New User Registration</p>
+        <p style="font-size: 40px">New User Registration</p>
 
-    <div class="form-group">
-      <label for="exampleName">Name</label>
-      <input name="name" type="text" class="form-control" id="exampleName" required>
+        <div class="form-group">
+          <label for="exampleName">Name</label>
+          <input name="name" type="text" class="form-control" id="exampleName" required>
+        </div>
+
+        <div class="form-group sex">
+          <label class="sex">Sex:</label>
+          <label class="radio-inline sex">
+            <input type="radio" name="sex" value="Male" checked> Male
+          </label>
+          <label class="radio-inline sex">
+            <input name="sex" type="radio" value="Female"> Female
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleMobile">Mobile Number</label>
+          <input name="mobile" type="text" class="form-control" id="exampleMobile" required>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleAddress">Address</label>
+          <input name="address" type="text" class="form-control" id="exampleAddress" required>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email ID</label>
+          <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+
+        <div class="form-group ">
+          <label class="sex" for="exampleIdProof">Enter Aadhar Number: </label>
+          <input name="aadhar" type="text" class="form-control" id="exampleAadhar" required>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleReason">Set Password</label>
+          <input name="pass" type="password" class="form-control" id="exampleInputPassword1" required>
+        </div>
+
+
+        <div class="container" style="margin-left: auto , margin-right: auto;">
+          <button class="btn btn-primary" style="margin-bottom: 10px;" id="snap">Capture</button>
+
+          <button class="btn btn-primary" id="upload-button" style="margin-bottom: 10px;" disabled onclick="upload()">Upload Image</button>
+          <!-- Stream video via webcam -->
+
+          <video id="video" width=300 height=300 playsinline controls autoplay></video>
+          <canvas style="align:center;" id="canvas" width="300" height="300"></canvas>
+
+        </div>
+        <div class="">
+          <input type="text" name="url" id="url" value="" hidden>
+        </div>
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+          <label class="form-check-label" for="exampleCheck1">Accept terms and conditions</label>
+        </div>
+
+        <button formaction="/signup" formmethod="post" type="submit" id="submit-button" disabled class="btn btn-primary">submit</button>
+
+      </form>
     </div>
-
-    <div class="form-group sex">
-      <label class="sex">Sex:</label >
-      <label class="radio-inline sex">
-        <input type="radio" name="sex" value="Male"checked> Male
-      </label>
-      <label class="radio-inline sex">
-        <input name="sex" type="radio" value="Female" > Female
-      </label>
-    </div>
-
-    <div class="form-group">
-      <label for="exampleMobile">Mobile Number</label>
-      <input name="mobile" type="text" class="form-control" id="exampleMobile" required>
-    </div>
-
-    <div class="form-group">
-      <label for="exampleAddress">Address</label>
-      <input name="address"type="text" class="form-control" id="exampleAddress" required>
-    </div>
-
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email ID</label>
-    <input name="email"type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-  </div>
-
-  <div class="form-group ">
-    <label class="sex" for="exampleIdProof">Enter Aadhar Number: </label>
-    <input name="aadhar" type="text" class="form-control" id="exampleAadhar" required>
-    </select>
-  </div>
-
-  <div class="form-group">
-    <label for="exampleReason">Set Password</label>
-    <input name="pass" type="password" class="form-control" id="exampleInputPassword1" required>
-  </div>
-
-
-<div class="container" style="margin-left: auto , margin-right: auto;" >
-  <button class="btn btn-primary" style="margin-bottom: 10px;" id="snap">Capture</button>
-
- <button class="btn btn-primary" style="margin-bottom: 10px;" onclick="upload()">Upload Image</button>
- <!-- Stream video via webcam -->
-
- <video id="video" width=300 height=300 playsinline controls autoplay></video>
-<canvas id="canvas" width="640" height="480"></canvas>
-
-</div>
-<div class="" >
-  <input type="text" name="url" id="url" value="" hidden>
-</div>
-<div class="form-group form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
-    <label class="form-check-label" for="exampleCheck1">Accept terms and conditions</label>
-  </div>
-
-<button formaction="/signup" formmethod="post" type="submit" class="btn btn-primary">submit</button>
-
-</form>
-</div>
-</section>
+  </section>
 
 
 
-<footer class="panel-footer">
+  <footer class="panel-footer">
     <div class="container" style="width: 100%">
       <div class="row">
         <section id="hours" class="col-sm-4">
@@ -153,8 +154,8 @@
 
         <section id="address" class="col-sm-4">
           <span>Address:</span><br>
-           IIIT - Allahabad, Jhalwa Campus, Deoghat<br>
-           Allahabad-211012<br>
+          IIIT - Allahabad, Jhalwa Campus, Deoghat<br>
+          Allahabad-211012<br>
           India
           <hr class="visible-xs">
         </section>
@@ -163,7 +164,7 @@
         <section id="testimonials" class="col-sm-4">
           <p>About:</p>
           <p>"VMS" is aimed to increase the efficiency of Visitor management systems in the hotel /residential places .The main objectiveis to increase security and safety of the visitors .
-</p>
+          </p>
           <p>owner: VMS</p>
         </section>
       </div>
@@ -171,7 +172,7 @@
     </div>
   </footer>
 
-   <script src="js/jquery-3.5.1.min.js"></script>
+  <script src="js/jquery-3.5.1.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/script.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -179,108 +180,121 @@
 </body>
 
 
- <!-- <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script> -->
-  <!-- <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script> -->
-  <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-storage.js"></script>
-  <!-- <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-analytics.js"></script> -->
+<!-- <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script> -->
+<!-- <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script> -->
+<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-storage.js"></script>
+<!-- <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-analytics.js"></script> -->
 
-  <script>
+<script>
   var firebaseConfig = {
-      apiKey: "AIzaSyDnTFuV4llT49sbHJtcxGUPezfOW0CKJ0o",
-      authDomain: "vms-sem4.firebaseapp.com",
-      projectId: "vms-sem4",
-      storageBucket: "vms-sem4.appspot.com",
-      messagingSenderId: "436501438451",
-      appId: "1:436501438451:web:55861e256d915128e9fc86",
-      measurementId: "G-QTTWTF8QPG"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    console.log(firebase);
+    apiKey: "AIzaSyDnTFuV4llT49sbHJtcxGUPezfOW0CKJ0o",
+    authDomain: "vms-sem4.firebaseapp.com",
+    projectId: "vms-sem4",
+    storageBucket: "vms-sem4.appspot.com",
+    messagingSenderId: "436501438451",
+    appId: "1:436501438451:web:55861e256d915128e9fc86",
+    measurementId: "G-QTTWTF8QPG"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  console.log(firebase);
 
-    // function uploadImage() {
-    //   const ref = firebase.storage().ref();
-    //   const file = document.querySelector("#photo").files[0];
-    //   const name = +new Date() + "-" + file.name;
-    //   const metadata = {
-    //     contentType: file.type
-    //   };
-    //   const task = ref.child(name).put(file, metadata);
-    //   task
-    //     .then(snapshot => snapshot.ref.getDownloadURL())
-    //     .then(url => {
-    //       console.log(url);
-    //       document.querySelector("#image").src = url;
-    //     })
-    //     .catch(console.error);
-    // }
+  // function uploadImage() {
+  //   const ref = firebase.storage().ref();
+  //   const file = document.querySelector("#photo").files[0];
+  //   const name = +new Date() + "-" + file.name;
+  //   const metadata = {
+  //     contentType: file.type
+  //   };
+  //   const task = ref.child(name).put(file, metadata);
+  //   task
+  //     .then(snapshot => snapshot.ref.getDownloadURL())
+  //     .then(url => {
+  //       console.log(url);
+  //       document.querySelector("#image").src = url;
+  //     })
+  //     .catch(console.error);
+  // }
 
 
 
-const video = document.getElementById('video');
-const canvas = document.getElementById('canvas');
-const snap = document.getElementById("snap");
-const errorMsgElement = document.querySelector('span#errorMsg');
+  const video = document.getElementById('video');
+  const canvas = document.getElementById('canvas');
+  const snap = document.getElementById("snap");
+  const errorMsgElement = document.querySelector('span#errorMsg');
 
-const constraints = {
-  audio: false,
-  video: {
-    width: 400, height: 400
+  const constraints = {
+    audio: false,
+    video: {
+      width: 300,
+      height: 300
+    }
+  };
+
+  // Access webcam
+  async function init() {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
+      handleSuccess(stream);
+    } catch (e) {
+      errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
+    }
   }
-};
 
-// Access webcam
-async function init() {
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia(constraints);
-    handleSuccess(stream);
-  } catch (e) {
-    errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
+  // Success
+  function handleSuccess(stream) {
+    window.stream = stream;
+    video.srcObject = stream;
   }
-}
 
-// Success
-function handleSuccess(stream) {
-  window.stream = stream;
-  video.srcObject = stream;
-}
+  // Load init
+  init();
 
-// Load init
-init();
-
-// Draw image
-var context = canvas.getContext('2d');
-snap.addEventListener("click", function() {
-    context.drawImage(video, 0, 0, 640, 480);
+  // Draw image
+  var context = canvas.getContext('2d');
+  snap.addEventListener("click", function() {
+    context.drawImage(video, 0, 0, 300, 300);
     var image = new Image();
-image.id = "pic";
-image.src = canvas.toDataURL();
-console.log(image.src)
-var button = document.createElement('button')
-button.textContent = 'Upload Image'
-document.body.appendChild(button)
+    image.id = "pic";
+    image.src = canvas.toDataURL();
+    console.log(image.src)
+    var button = document.createElement('button')
+    button.textContent = 'Upload Image'
+    document.body.appendChild(button)
 
-});
-function upload(){
-  const ref = firebase.storage().ref();
-  const d=new Date() + '-' + 'base64';
-  var src = canvas.toDataURL();
-  ref.child(d).putString(src, 'data_url').then(function(snapshot) {
-  console.log('Uploaded a data_url string!');
-  console.log(src);
-  const storage = firebase.storage();
-  storage.ref(d).getDownloadURL()
-    .then((url) => {
-      console.log(url);
-      document.getElementById("url").value=url;
+    document.getElementById("upload-button").disabled=false;
 
-    })
-  // console.log(d.getDownloadURL());
-  alert("Image Uploaded")
-});
-}
-  </script>
+  });
+
+  async function upload() {
+    const ref = firebase.storage().ref();
+
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = ' ';
+    const charactersLength = characters.length;
+    for (let i = 0; i < 30; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    // const d=new Date() + '-' + 'base64';
+    var src = canvas.toDataURL();
+    ref.child(result).putString(src, 'data_url').then(function(snapshot) {
+      console.log('Uploaded a data_url string!');
+      console.log(result);
+      // console.log(src);
+      // const storage = firebase.storage();
+      // storage.ref(result).getDownloadURL()
+      //   .then((url) => {
+      //     // console.log(url);
+      //     document.getElementById("url").value = url;
+      //
+      //   })
+      // console.log(d.getDownloadURL());
+      alert("Image Uploaded")
+      document.getElementById("submit-button").disabled=false;
+    });
+  }
+</script>
 
 
 

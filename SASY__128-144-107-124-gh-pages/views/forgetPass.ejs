@@ -12,16 +12,16 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 
-<body style="background-image: url('/resources/forget.jpg')";>
+<body style="background-image: url('/resources/forget.jpg')" ;>
   <%  if(message){  %>
-      <div style='text-align: center' class="alert alert-danger">
-        <button type="button" class="close" data-dismiss='alert'>&times;</button>
-        <strong><%= message.intro %></strong> <%= message.message %>
-      </div>
+  <div style='text-align: center' class="alert alert-danger">
+    <button type="button" class="close" data-dismiss='alert'>&times;</button>
+    <strong><%= message.intro %></strong> <%= message.message %>
+  </div>
   <%  }  %>
 
   <button onclick="topFunction()" id="myBtn" title="Go to top">
@@ -36,20 +36,20 @@
   <header>
     <div class="" id="head-color">
 
-       <nav class="navbar navbar-expand-lg ">
+      <nav class="navbar navbar-expand-lg ">
 
-        <a class="navbar-brand" href="">
+        <a class="navbar-brand" href="/">
           <img src="/resources/logo.png" width="40" height="40" class="d-inline-block align-top" alt="" loading="lazy">
         </a>
 
-        <a class="navbar-brand" href="" id=""   style="  color: white;">VMS</a>
+        <!-- <a class="navbar-brand" href="" id=""   style="  color: white;">VMS</a> -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-item nav-link  navbar-ic-position " id="" href="/"   style="  color: white;">Home </a>
-            <a class="nav-item nav-link  navbar-ic-position " id="" href="/profile"   style="  color: white;">Profile </a>
+            <a class="nav-item nav-link  navbar-ic-position " id="" href="/" style="  color: white;">Home </a>
+            <a class="nav-item nav-link  navbar-ic-position " id="" href="/profile" style="  color: white;">Profile </a>
             <!-- <a class="nav-item nav-link navbar-ic-position active" id=""  href="login"   style="  color: white;">login</a> -->
             <!-- <a class="nav-item nav-link navbar-ic-position " id="" href="signup"   style="  color: white;">signup</a> -->
             <!-- <div><button onclick="myFunction()"class="btn btn-primary">dark mode</button></div> -->
@@ -62,9 +62,9 @@
 
   <section>
 
-   <div class="form-container" id="head-color" style="padding-bottom: 10px">
+    <div class="form-container" id="head-color" style="padding-bottom: 10px">
 
-      <form >
+      <form>
         <p style="font-size: 40px">Reset Password</p>
 
         <div class="form-group">
@@ -75,14 +75,14 @@
           <p style="font-size: 15px">An email will be sent to your registered email account containing the link to reset the password.</p>
           <p style="font-size: 12px">This page will automatically redirect to login page when email has been sent</p>
         </div>
-        <button formaction="/forgetPass" formmethod="post"type="submit" name="submit" id="login-button" class="btn btn-primary">Submit</button>
+        <button formaction="/forgetPass" formmethod="post" type="submit" name="submit" id="login-button" class="btn btn-primary">Submit</button>
 
       </form>
     </div>
   </section>
 
 
-<footer class="panel-footer">
+  <footer class="panel-footer">
     <div class="container" style="width: 100%">
       <div class="row">
         <section id="hours" class="col-sm-4">
@@ -100,8 +100,8 @@
 
         <section id="address" class="col-sm-4">
           <span>Address:</span><br>
-           IIIT - Allahabad, Jhalwa Campus, Deoghat<br>
-           Allahabad-211012<br>
+          IIIT - Allahabad, Jhalwa Campus, Deoghat<br>
+          Allahabad-211012<br>
           India
           <hr class="visible-xs">
         </section>
@@ -110,7 +110,7 @@
         <section id="testimonials" class="col-sm-4">
           <p>About:</p>
           <p>"VMS" is aimed to increase the efficiency of Visitor management systems in the hotel /residential places .The main objectiveis to increase security and safety of the visitors .
-</p>
+          </p>
           <p>owner: VMS</p>
         </section>
       </div>

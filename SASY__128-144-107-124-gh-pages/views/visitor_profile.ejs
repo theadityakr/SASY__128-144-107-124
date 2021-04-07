@@ -41,7 +41,7 @@
 
    <nav class="navbar navbar-expand-lg " >
 
-        <a class="navbar-brand" href="home.html">
+        <a class="navbar-brand" href="/">
           <img src="/resources/logo.png" width="40" height="40" class="d-inline-block align-top" alt="" loading="lazy">
         </a>
 
@@ -116,9 +116,9 @@
         <label for="exampleInputEmail1">duration of stay</label>
 
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="visiting time" />
+          <input type="text" class="form-control" placeholder="visiting time" value="<%= visitor.inDate %>" style="color: black;" readonly/>
           <span class="input-group-addon">-</span>
-          <input type="text" class="form-control" placeholder="leaving time" />
+          <input type="text" class="form-control" placeholder="leaving time"  value="<%= visitor.outDate %>" style="color: black;" readonly/>
         </div>
 
 
@@ -146,6 +146,7 @@
 <div class="">
   <img src="<%= visitor.url %>" alt="">
 </div>
+
 
 <footer class="panel-footer">
     <div class="container" style="width: 100%">

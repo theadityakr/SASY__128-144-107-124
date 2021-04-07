@@ -13,15 +13,15 @@
   <link rel="stylesheet" href="css/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;500&display=swap" rel="stylesheet">
   <link rel="icon" href="/logo.png">
-</head    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">>
+</head <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">>
 
 
-<body style="background-image: url('/resources/reset.jpg')";>
+<body style="background-image: url('/resources/reset.jpg')" ;>
   <%  if(message){  %>
-      <div style='text-align: center' class="alert alert-<%= message.type %>">
-        <button type="button" class="close" data-dismiss='alert'>&times;</button>
-        <strong><%= message.intro %></strong> <%= message.message %>
-      </div>
+  <div style='text-align: center' class="alert alert-<%= message.type %>">
+    <button type="button" class="close" data-dismiss='alert'>&times;</button>
+    <strong><%= message.intro %></strong> <%= message.message %>
+  </div>
   <%  }  %>
 
   <button onclick="topFunction()" id="myBtn" title="Go to top">
@@ -38,18 +38,19 @@
 
       <nav class="navbar navbar-expand-lg ">
 
-        <a class="navbar-brand" href="">
-
+        <a class="navbar-brand" href="/">
+          <imgsrc=" /resources/logo.png" width="40" height="40" class="d-inline-block align-top" alt="" loading="lazy">
         </a>
 
-        <a class="navbar-brand" href=""   style="  color: white;">VMS</a>
+        <!-- <a class="navbar-brand" href="/" id=""  style=" color: white;" >VMS</a> -->
+        <a class="navbar-brand" href="/" style="  color: white;">VMS</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-item nav-link  navbar-ic-position "  href="/"   style="  color: white;">Home </a>
-            <a class="nav-item nav-link  navbar-ic-position "  href="/profile"   style="  color: white;">Profile </a>
+            <a class="nav-item nav-link  navbar-ic-position " href="/" style="  color: white;">Home </a>
+            <a class="nav-item nav-link  navbar-ic-position " href="/profile" style="  color: white;">Profile </a>
             <!-- <a class="nav-item nav-link navbar-ic-position active"   href="login"   style="  color: white;">login</a> -->
             <!-- <a class="nav-item nav-link navbar-ic-position "  href="signup"   style="  color: white;">signup</a> -->
             <!-- <div><button onclick="myFunction()"class="btn btn-primary">dark mode</button></div> -->
@@ -61,13 +62,13 @@
   </header>
 
   <section>
-<%  var vuser= user.username%>
- <div class="form-container" id="head-color"style="padding-bottom: 10px">
+    <%  var vuser= user.username%>
+    <div class="form-container" id="head-color" style="padding-bottom: 10px">
 
-      <form >
+      <form>
 
-        <div class="form-group" >
-            <input name="username" type="text" class="form-control" id="exampleInputId" value="<%= vuser %>" hidden>   </input>
+        <div class="form-group">
+          <input name="username" type="text" class="form-control" id="exampleInputId" value="<%= vuser %>" hidden> </input>
         </div>
 
         <p style="font-size: 40px">Reset Password</p>
@@ -87,9 +88,9 @@
 
     </div>
   </section>
-  
-  
-<footer class="panel-footer">
+
+
+  <footer class="panel-footer">
     <div class="container" style="width: 100%">
       <div class="row">
         <section id="hours" class="col-sm-4">
@@ -107,8 +108,8 @@
 
         <section id="address" class="col-sm-4">
           <span>Address:</span><br>
-           IIIT - Allahabad, Jhalwa Campus, Deoghat<br>
-           Allahabad-211012<br>
+          IIIT - Allahabad, Jhalwa Campus, Deoghat<br>
+          Allahabad-211012<br>
           India
           <hr class="visible-xs">
         </section>
@@ -117,17 +118,17 @@
         <section id="testimonials" class="col-sm-4">
           <p>About:</p>
           <p>"VMS" is aimed to increase the efficiency of Visitor management systems in the hotel /residential places .The main objectiveis to increase security and safety of the visitors .
-</p>
+          </p>
           <p>owner: VMS</p>
         </section>
       </div>
       <div class="text-right">&copy; Copyright VMS 2020. All rights reserved</div>
     </div>
   </footer>
-  
-  
-  
-  
+
+
+
+
 
   <script src="js/jquery-3.5.1.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
