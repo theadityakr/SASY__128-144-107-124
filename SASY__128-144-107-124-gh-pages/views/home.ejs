@@ -26,8 +26,8 @@
     integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
   <!-- css stylesheet  -->
-  <link rel="stylesheet" href="/css/styles.css">
-  <!-- <link rel="stylesheet" href="style.css"> -->
+  <!-- <link rel="stylesheet" href="/css/styles.css"> -->
+  <link rel="stylesheet" href="/css/style.css">
 
   <!-- jquery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -50,7 +50,7 @@
   <div class="navbar-main">
     <nav class=" navbar navbar-expand-lg top-header responsive-navbar">
         <div class="container-fluid">
-            
+
             <a class="navbar-brand logo" href="/home">
                 <img src="/resources/logo.png" alt="" width="80" height="70" class="d-inline-block align-top logo-image" >
                 <span class="logo-name">VMS</span>
@@ -62,11 +62,11 @@
 
 <section id="main-text">
     <div class="row main-text-row">
-        <div class="col-sm-5 col-xs-12">
+        <div class="col-lg-5 ">
             <h1  class="text"><b>Visitor Management System</b></h1>
         </div>
 
-        <div class="col-sm-7 col-xs-12">
+        <div class="col-lg-7 ">
           <img class="img-fluid main-img" src="resources/home-design.jpeg" alt="">
         </div>
 
@@ -77,29 +77,68 @@
 
 <!-- login -->
 <section id="login">
+  <% if(user=="admin"){ %>
     <div class="align-login">
-        <a href="/login">
+        <a href="/profile">
         <div class="row">
             <div class="col-sm-6 col-xs-12 col-card">
                 <div class="login-card">
                     <div class="card-body">
-                        <h3 class="name"><strong>Admin Login</strong></h3>
+                        <h3 class="name"><strong>Admin Profile</strong></h3>
                         <img src="resources/user-login.png" class="admin-img img-fluid" alt="">
                     </div>
                 </div>
             </div>
-            
-            <div class="col-sm-6 col-xs-12 visitor-img col-card">
+        </div>
+    </div>
+  <% } %>
+
+
+  <% if(user=="visitor"){ %>
+    <div class="align-login">
+        <a href="/profile">
+        <div class="row">
+            <div class="col-sm-6 col-xs-12 col-card">
                 <div class="login-card">
                     <div class="card-body">
-                        <h3 class="name"><strong>Visitor Login</strong></h3>
-                        <img src="resources/user-login.png" class="visitor-img img-fluid" alt="">
+                        <h3 class="name"><strong>Visitor Profile</strong></h3>
+                        <img src="resources/user-login.png" class="visito-img img-fluid" alt="">
                     </div>
                 </div>
             </div>
         </div>
-    </a>
     </div>
+  <% } %>
+
+
+  <% if(user=="nil"){ %>
+
+      <div class="align-login">
+          <a href="/login">
+          <div class="row">
+              <div class="col-sm-6 col-xs-12 col-card">
+                  <div class="login-card">
+                      <div class="card-body">
+                          <h3 class="name"><strong>Admin Login</strong></h3>
+                          <img src="resources/user-login.png" class="admin-img img-fluid" alt="">
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-sm-6 col-xs-12 visitor-img col-card">
+                  <div class="login-card">
+                      <div class="card-body">
+                          <h3 class="name"><strong>Visitor Login</strong></h3>
+                          <img src="resources/user-login.png" class="visitor-img img-fluid" alt="">
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </a>
+      </div>
+  <% } %>
+
+
   </section>
 
 
