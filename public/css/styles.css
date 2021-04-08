@@ -1,0 +1,319 @@
+body {
+   background-image: linear-gradient(to bottom right, purple, lightblue);
+  font-size: 16px;
+  color: white;
+
+  font-family: 'Raleway', sans-serif;
+  /* text-transform: lowercase; */
+}
+
+.dark-mode {
+color: white!important;
+  background-color: black;
+
+ font-size: 16px;
+font-family: 'Raleway', sans-serif;
+  /* text-transform: lowercase; */
+}
+.bg-light {
+   background-color: rgba(0, 0, 0, 0.5)!important;
+  color: white!important;
+}
+
+
+.form-control {
+  display: block;
+  width: 100% !important;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+
+
+#head-color{
+padding-left: auto;
+padding-right: auto;
+  background-color: rgba(0, 0, 0, 0.5)!important;
+  color: white!important;
+}
+
+  #myBtn {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 27px; /* Place the button at the bottom of the page */
+  right: 0px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: #878787; /* Set a background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: none; /* Some padding */
+  border-radius: 90%; /* Rounded corners */
+  font-size: 30px; /* Increase font size */
+opacity: 1;}
+
+.currentColor{
+	color: #878787;
+}
+
+#myBtn:hover {
+  background-color: #676767; /* Add a dark-grey background on hover */
+}
+
+
+.navbar-toggler-icon{outline: none; border: none;}
+/** HEADER **/
+.navbar {
+
+  padding: 0.5rem 1rem ;
+  padding-top: 1.2rem;
+  padding-bottom: 0rem;
+
+}
+
+
+
+#logo-img {
+  background: url('Minimalistic_artwork_fusion_zometool_1920x1080.jpg') no-repeat;
+  width: 150px;
+  height: 150px;
+  margin: 10px 15px 10px 0;
+}
+
+.navbar-ic-position{
+	text-align: right;
+}
+
+.margi{
+	margin-top: 100px
+}
+
+.navbar-brandx {
+  display: inline-block;
+  font-size: 1.25rem;
+  line-height: inherit;
+  white-space: nowrap;
+}
+
+.navbar-brandx:hover, .navbar-brandx:focus {
+  text-decoration: none;
+}
+
+.jumbotron {
+	margin-top: 25px;
+ text-align: center;
+  background-color: #878787;
+
+}
+.content {
+
+position: fixed;
+  top: 0px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  width: 100%;
+  padding: 20px;
+}
+.lead {
+  font-size: 1rem;
+  margin-left:25px;margin-right:25px;
+  font-weight: 300;
+  margin-bottom: 150px;
+}
+
+
+#admin-tile , #visitor-tile {
+background-color: red;
+  height: 220px;
+  width: 100%;
+
+  margin-bottom: 15px;
+  position: relative;
+  /*border: 2px solid #3F0C1F;*/
+  overflow: hidden;
+
+
+}
+#admin-tile:hover{
+background-image: url('/resources/home_admin_background.png');
+  box-shadow: 0 1px 5px 1px white;
+}
+#visitor-tile:hover{
+background-image: url('/resources/home_visitor_background.png');
+box-shadow: 0 1px 5px 1px white;
+}
+#admin-tile{
+
+  background-position: center;
+}
+#visitor-tile {
+  background: url('../images/specials-tile.jpg') no-repeat;
+  background-position: center;
+}
+
+#admin-tile span, #visitor-tile span, #Pricing-tile span {
+position: absolute;
+top:0;
+right: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 1em;
+  text-transform: lowercase;
+  font-weight: 500;
+  color: #141414;
+  margin-top: 100px;
+
+}
+
+
+
+.container {
+width: 45%;
+  padding-right: 35px;
+  padding-left: 30px;
+  padding-bottom: 30px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media only screen and (max-width: 1000px) {
+  .container {
+width: 100%;
+  padding-right: 35px;
+  padding-left: 30px;
+  padding-bottom: 30px;
+  margin-right: auto;
+  margin-left: auto;
+}
+}
+
+.form-container
+{
+  width:50%;
+  margin:auto;
+}
+
+.sex{
+  padding-right:7px;
+}
+
+
+#admin-tile , #visitor-tile, #Pricing-tile {
+background-color: white;}
+
+
+.btn-primary {
+  color: white;
+  background-color: darkgrey;
+  	border-color: darkgray;
+  	border-radius: 25px;
+
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: black;
+  border-color: black;}
+
+#tile-margi{
+margin-top: +500px;
+
+}
+#tile-para{
+right: 0;
+	text-align: center;
+	position: absolute;
+	color: #141414;
+	font-size: 13px;
+	margin-right: 15px;
+	margin-left: 15px;
+	top:250px;
+
+}
+
+
+.dropdown-menu{background-color: #f6f6f6;}
+
+.dropdown-item:hover, .dropdown-item:focus {
+  color: #16181b;
+  text-decoration: none;
+  background-color: #878787;
+}
+
+form{
+	margin-left:15px;
+	margin-top: 95px;
+	color: white;
+}
+#upload-photo{
+	margin-top: 100px;
+}
+a{
+	color: #505050;
+}
+a:hover{
+text-decoration: none;
+	color:blue;
+}
+
+button>a:hover{
+	color:#878787;
+}
+
+.panel-footer{
+margin-top: 100px;
+	 background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+	margin-bottom: 0px;
+	padding-top: 10px;padding-bottom: 5px;
+}
+
+#img-back{
+	background-color: #f6f6f6;
+}
+
+
+.fa {
+  padding: 6.9px;
+  height:30px;
+  width: 30px;
+  text-align: center;
+  text-decoration: none;
+  margin-left: 0px;
+  margin: 10px 10px;
+  border-radius: 50%;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+  background: black;
+  color: white;
+}
+
+.fa-twitter {
+  background: black;
+  color: white;
+}
+
+.fa-linkedin {
+  background: black;
+  color: white;
+}
+
+
+.fa-instagram {
+  background: black;
+  color: white;
+}
