@@ -28,6 +28,16 @@ function matchPassword() {
     alert("Password created successfully");
   }
 }
+
+
+function phonenumber() 
+{   
+   var p = document.getElementById("exampleMobile").value;
+console.log(p);
+  if(p.length!=10)
+{
+        alert(" Please Enter a Correct Mobile Number");}
+}
 </script>
 
 
@@ -129,7 +139,7 @@ function matchPassword() {
         <input  type = "password" class="form-control" name = "pswd2" id="exampleInputPassword2" required>
         </div>
 
-        <button class="btn btn-primary" type = "submit" onclick="matchPassword()">Confirm Password First</button>  
+        <button class="btn btn-primary" type = "submit" onclick="matchPassword()  , phonenumber() ">Confirm Password First</button>  
 
         <div class="container" style="margin-left: auto , margin-right: auto;">
           <button class="btn btn-primary" style="margin-bottom: 10px;" id="snap">Capture</button>
