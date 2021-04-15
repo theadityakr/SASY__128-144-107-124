@@ -15,6 +15,21 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
+<script>
+function matchPassword() {
+  var pw1 = document.getElementById("exampleInputPassword1").value;
+  var pw2 = document.getElementById("exampleInputPassword2").value;
+  console.log(pw1);
+  console.log(pw2);
+  if(pw1 != pw2)
+  { 
+    alert("Passwords did not match");
+  } else {
+    alert("Password created successfully");
+  }
+}
+</script>
+
 
 <body style="background-image: url('/resources/signup.jpg')" ;>
   <%  if(message){  %>
@@ -109,6 +124,12 @@
           <input name="pass" type="password" class="form-control" id="exampleInputPassword1" required>
         </div>
 
+    <div class="form-group">
+          <label for="exampleReason">Confirm Password</label>
+        <input  type = "password" class="form-control" name = "pswd2" id="exampleInputPassword2" required>
+        </div>
+
+        <button class="btn btn-primary" type = "submit" onclick="matchPassword()">Confirm Password First</button>  
 
         <div class="container" style="margin-left: auto , margin-right: auto;">
           <button class="btn btn-primary" style="margin-bottom: 10px;" id="snap">Capture</button>
