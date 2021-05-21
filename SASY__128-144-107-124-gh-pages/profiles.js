@@ -5,12 +5,10 @@ const passportLocalMongoose = require('passport-local-mongoose');
 var QRCode = require('qrcode')
 module.exports = function(app){
 
-
   const User= mongoose.model("User");
 
 
   app.get("/admin_profile",function(req,res){
-  // console.log(req.user.username);
     if(req.isAuthenticated() )
     {
         findVisitor();
@@ -33,15 +31,12 @@ module.exports = function(app){
                   "status":"",
                   "forgetPass":undefined,
                 };
-
                 res.render("admin_profile.ejs",{Admin_Name:req.user.name,details:check,visitor:user});
-
             }
           })
         };
 
     }
-      // res.render("admin_profile");
     else{
       res.redirect("/login");
     }
@@ -52,12 +47,11 @@ module.exports = function(app){
     if(req.isAuthenticated())
     {
         var username= req.user.username;
-        console.log(req.user.url);
+        console.log(username);
         findVisitor();
         async function findVisitor(){
           await User.findOne({username:username},function(err,user){
-            if(err)
-            {
+            if(err){
               console.log(err);
             }
             else{
@@ -70,7 +64,6 @@ module.exports = function(app){
         };
 
     }
-      // res.render("admin_profile");
     else{
       res.redirect("/login");
     }
@@ -85,12 +78,10 @@ module.exports = function(app){
       else
       res.redirect("/visitor_profile");
     }
-    else
-    {
+    else{
       res.redirect("/login");
     }
 
   });
 
-    //other routes..
 }
