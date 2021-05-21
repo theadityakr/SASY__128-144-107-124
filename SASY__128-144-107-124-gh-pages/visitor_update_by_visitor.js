@@ -10,7 +10,7 @@ module.exports = function(app){
 
 
   app.get("/visitor_update_by_visitor",function(req,res){
-    res.redirect("/Profile");
+    res.redirect("/profile");
   });
 
 
@@ -27,36 +27,42 @@ module.exports = function(app){
       else{
         if(user)
         {
-            User.updateOne({username:req.body.username},{name:req.body.name,email:req.body.email,mobile:req.body.mobile,address:req.body.address},function(){
-                  User.find({username:{ $regex: /^v/ }},function(err,check){
+            User.updateOne({username:req.body.username},{name:req.body.name,email:req.body.email,mobile:req.body.mobile,address:req.body.address},function(err){
+                  // User.find({username:{ $regex: /^v/ }},function(err,check){
                   if(err)
                   console.log(err);
                   else{
-                    // console.log(user.email);
-                    user={
-                      "name":req.body.name,
-                      "sex":req.body.sex,
-                      "username":req.body.username,
-                      "address":req.body.address,
-                      "email":req.body.email,
-                      "mobile":req.body.mobile,
-                      "aadhar":req.body.aadhar,
-                      "password":"",
-                      "status":""
-                    };
-                    req.session.message={
-                      type:'success',
-                      intro:'Updated',
-                      message:'Your details updated successfully'
-                    }
+                  //   // console.log(user.email);
+                  //   user={
+                  //     "name":req.body.name,
+                  //     "sex":req.body.sex,
+                  //     "username":req.body.username,
+                  //     "address":req.body.address,
+                  //     "email":req.body.email,
+                  //     "mobile":req.body.mobile,
+                  //     "aadhar":req.body.aadhar,
+                  //     "password":"",
+                  //     "status":""
+                  req.session.message={
+                    type:'success',
+                    intro:'Updated',
+                    message:'Details updated successfully'
+                  }
+                  QRCode.toDataURL(req.user.username,function(err,img){
+                    res.render("visitor_profile.ejs",{Visitor_Name:username,visitor:user,qr_code:img,message:req.session.message});
+                  });
 
-                    res.render("visitor_profile.ejs",{Visitor_Name:req.user.name,visitor:user,message:req.session.message});
+                  // res.render("visitor_profile.ejs",{Visitor_Name:req.user.name,visitor:user,message:req.session.message});
+                  // res.redirect("/profile");
+
+
+                    };
 
                     // res.redirect("/");
-                  }
-                })
+                  // }
+                });
                 // res.redirect("/profile");
-            });
+            // });
         }
 
 
