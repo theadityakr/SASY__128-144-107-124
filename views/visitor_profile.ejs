@@ -48,7 +48,9 @@
         <a class="navbar-brand" href="/" id=""   style="  color: white;">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
           aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+          <span >
+            <img  src="/resources/square.png" width="40" height="40"  alt="">
+          </span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
@@ -68,7 +70,10 @@
     </nav>
     </div>
   </header>
-
+<br>
+<h1 style="text-align: right;  margin: auto;padding: 10px; ">
+  Visitor Profile
+</h1>
   <h1 style="text-align: right;  margin: auto;padding: 10px; ">
     <%= Visitor_Name %>
   </h1>
@@ -76,8 +81,9 @@
     <img  style="text-align: right;  margin: auto; margin-right: 10px; padding: 20px; height: 200px; width:200px; display:block"src="<%= visitor.url %>" alt="">
   </div>
 
-  <h4 style="text-align: center;  margin: auto;padding: 10px; "> Scan for Entry</h1>
-  </h4>
+  <h3 style="text-align: center;  margin: auto;padding: 10px; ">Status: <%= visitor.status %></h3>
+
+  <h4 style="text-align: center;  margin: auto;padding: 10px; "> Scan for Entry</h4>
 
 <div  style="text-align: center;  margin: auto;padding: 10px; " class="">
   <img src="<%= qr_code %>" alt="">
@@ -88,7 +94,7 @@
 <section>
   <div class="container" style="width: 90%;" id="head-color">
 
-    <form>
+    <form id="update-form">
 
       <div class="form-group">
         <label style="margin-top: 15px;" for="visitor_id">visitor_id</label>
@@ -113,13 +119,18 @@
       </div>
 
       <div class="form-group">
-        <label for="mobile">mobile</label>
-        <input name="mobile" type="text" class="form-control" id="mobile" value="<%= visitor.mobile %>">
+        <label id="mobile-number" for="mobile">mobile</label>
+        <input id="mobile" name="mobile" type="text" class="form-control"  value="<%= visitor.mobile %>">
       </div>
+      <div style="color:red;" id="mobileResponseDiv"></div>
 
       <div class="form-group">
         <label for="address">address</label>
         <input name="address" type="text" class="form-control" id="address" value="<%= visitor.address %>">
+      </div>
+      <div class="form-group">
+        <label for="requestedDate">requested date</label>
+        <input name="requestedDate" type="text" class="form-control" id="reqDate" value="<%= visitor.reqDate %>">
       </div>
 
       <div class="form-group">
@@ -137,7 +148,7 @@
 
   <div class="row">
     <div class="col-sm-12 text-center" style="margin-bottom: 2px;">
-      <button style="margin-top: 15px;" formaction="visitor_update_by_visitor" formmethod="post" onclick=""
+      <button id="update-button"style="margin-top: 15px;" formaction="visitor_update_by_visitor" formmethod="post" onclick=""
         class="btn btn-primary btn-md">Update</button>
     </div>
   </div>
@@ -199,6 +210,38 @@
   <script src="js/script.js"></script>
   <script src="js/ajax-utils.js"></script>
   <script src="js/admin.js"></script>
+  <script >
+  $(document).ready(function () {
+      $("#update-button").click(function (e) {
+          e.preventDefault();
+            var  mobile=$("#mobile").val();
+            console.log(mobile.length);
+
+
+          // var s="1230567890";
+          if(mobile.length==10) {
+              //Submit line commented out for example.  In production, remove the //
+              $("#update-form").attr("action","visitor_update_by_visitor");
+              $("#update-form").attr("method","post");
+              $("#update-form").submit();
+
+              //Shows success message and prevents submission.  In production, comment out the next 2 lines.
+              // $("#responseDiv").html("Passwords Match");
+              // return false;
+      }
+      else {
+
+          $("#mobileResponseDiv").html("Incorrect Mobile Number...<br></br>");
+          var x =0;
+          var y = $("#mobile-number").offset().top;
+          window.scrollTo(x,y);
+          // topfunction();
+          return false;
+      }
+  });
+  });
+
+  </script>
 
 </body>
 

@@ -50,13 +50,17 @@
 
         <a class="navbar-brand" href="/" style="  color: white;">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+          <span >
+            <img  src="/resources/square.png" width="40" height="40"  alt="">
+          </span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
 
+
+            <a class="nav-item nav-link navbar-ic-position" href="pendingRequests" style="  color: white;">Pending Requests</a>
+            <!-- <a class="nav-item nav-link navbar-ic-position" href="signup" style="  color: white;">Register New Visitor</a> -->
             <a class="nav-item nav-link navbar-ic-position" href="logout" style="  color: white;">Logout</a>
-            <a class="nav-item nav-link navbar-ic-position" href="signup" style="  color: white;">Register New Visitor</a>
 
           </div>
 
@@ -65,7 +69,8 @@
     </nav>
     </div>
   </header>
-
+<br>
+  <h1 style="text-align: center;  margin: auto;padding: 10px;">Admin Profile </h1>
   <h1 style="text-align: right;  margin: auto;padding: 10px;"><%= Admin_Name %> </h1>
 
 
@@ -89,7 +94,7 @@
 
   <section>
     <div class="container" style="width: 90%;" id="head-color">
-      <form>
+      <form id="update-form">
         <p style="font-size: 40px">User Details</p>
         <!-- <br> -->
         <div class="form-group">
@@ -124,9 +129,10 @@
         </div>
 
         <div class="form-group">
-          <label for="mobile">mobile</label>
-          <input name="mobile" type="text" class="form-control" id="mobile" value="<%= visitor.mobile %>">
+          <label for="mobile" id="mobile-number">mobile</label>
+          <input id="mobile" name="mobile" type="text" class="form-control" id="mobile" value="<%= visitor.mobile %>">
         </div>
+        <div style="color:red;" id="mobileResponseDiv"></div>
 
         <div class="form-group">
           <label for="address">address</label>
@@ -136,6 +142,10 @@
         <div class="form-group">
           <label for="status">card status</label>
           <input name="status" type="text" class="form-control" id="address" value="<%= visitor.status %>" readonly style="color: black;">
+        </div>
+        <div class="form-group">
+          <label for="status">requested date</label>
+          <input name="status" type="text" class="form-control" id="reqDate" value="<%= visitor.reqDate %>" readonly style="color: black;">
         </div>
 
 
@@ -156,7 +166,8 @@
 
       <div class="row">
         <div class="col-sm-12 text-center">
-          <button formaction="visitor_update_by_admin" formmethod="post" onclick="" class="btn btn-primary btn-md">Update</button>
+          <button formaction="checkin" formmethod="post" onclick="" class="btn btn-primary btn-md">Activate</button>
+          <button id="update-button" formaction="visitor_update_by_admin" formmethod="post" onclick="" class="btn btn-primary btn-md">Update</button>
           <button formaction="del_visitor" formmethod="post" onclick="" class="btn btn-primary btn-md">Deactivate</button>
         </div>
       </div>
@@ -178,6 +189,7 @@
             <th scope="col">mobile</th>
             <th scope="col">address</th>
             <th scope="col">status</th>
+            <th scope="col">requested date</th>
             <th scope="col">visiting time</th>
             <th scope="col">leaving time</th>
 
@@ -195,6 +207,7 @@
             <td><%= details[i].mobile %></td>
             <td><%= details[i].address %></td>
             <td><%= details[i].status %></td>
+            <td><%= details[i].reqDate %></td>
             <td><%= details[i].inDate %></td>
             <td><%= details[i].outDate %></td>
 
@@ -250,6 +263,38 @@
   <script src="js/script.js"></script>
   <script src="js/ajax-utils.js"></script>
   <script src="public/js/admin.js"></script>
+
+  <script >
+  $(document).ready(function () {
+      $("#update-button").click(function (e) {
+          e.preventDefault();
+            var  mobile=$("#mobile").val();
+            console.log(mobile.length);
+
+
+          if(mobile.length==10) {
+              //Submit line commented out for example.  In production, remove the //
+              $("#update-form").attr("action","visitor_update_by_admin");
+              $("#update-form").attr("method","post");
+              $("#update-form").submit();
+
+              //Shows success message and prevents submission.  In production, comment out the next 2 lines.
+              // $("#responseDiv").html("Passwords Match");
+              // return false;
+      }
+      else {
+
+          $("#mobileResponseDiv").html("Incorrect Mobile Number...<br></br>");
+          var x = 0;
+          var y = $("#mobile-number").offset().top;
+          window.scrollTo(x,y);
+          // topfunction();
+          return false;
+      }
+  });
+  });
+
+  </script>
 
 </body>
 

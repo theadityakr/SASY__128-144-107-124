@@ -28,7 +28,7 @@ module.exports = function(app){
         if(err)
         console.log(err);
         else{
-          if(user && user.status=="active"){
+          if(user && user.status!="Inactive"){
             console.log(user);
             User.updateOne({username:username},{forgetPass:token},function(err,check){
               if(err)

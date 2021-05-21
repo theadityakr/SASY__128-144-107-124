@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <base href="/">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>Admin Profile</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+
+
+</head>
+
+
+<body style="background-image: url('/resources/admin_profile.jpg')" ;>
+
+  <%  if(message){  %>
+  <div style='text-align: center' class="alert alert-<%= message.type %>">
+    <button type="button" class="close" data-dismiss='alert'>&times;</button>
+    <strong><%= message.intro %></strong> <%= message.message %>
+  </div>
+  <%  }  %>
+
+  <button onclick="topFunction()" id="myBtn" title="Go to top">
+    <svg width="1em" height="1em" viewBox="0 0 16 18" class="bi bi-arrow-up-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+      <path fill-rule="evenodd" d="M4.646 8.354a.5.5 0 0 0 .708 0L8 5.707l2.646 2.647a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 0 0 0 .708z" />
+      <path fill-rule="evenodd" d="M8 11.5a.5.5 0 0 0 .5-.5V6a.5.5 0 0 0-1 0v5a.5.5 0 0 0 .5.5z" />
+    </svg>
+  </button>
+
+
+  <header>
+    <div id="head-color">
+
+      <nav class="navbar navbar-expand-lg ">
+
+        <a class="navbar-brand" href="/">
+          <img src="/resources/logo.png" width="40" height="40" class="d-inline-block align-top" alt="" loading="lazy">
+        </a>
+
+        <a class="navbar-brand" href="/" style="  color: white;">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span >
+            <img  src="/resources/square.png" width="40" height="40"  alt="">
+          </span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+
+            <a class="nav-item nav-link navbar-ic-position" href="profile" style="  color: white;">Profile</a>
+            <a class="nav-item nav-link navbar-ic-position" href="pendingRequests" style="  color: white;">Pending Requests</a>
+            <a class="nav-item nav-link navbar-ic-position" href="logout" style="  color: white;">Logout</a>
+
+          </div>
+
+        </div>
+    </div>
+    </nav>
+    </div>
+  </header>
+
+<br>
+  <h1 style="text-align: center;  margin: auto;">Active Users </h1>
+  <h1 style="text-align: right;  margin: auto;padding: 10px;"><%= Admin_Name %> </h1>
+
+
+
+
+  <section>
+    <div class="container" id="" style="width: 90%;">
+
+      <form action="search_visitor" method="post">
+
+        <div class="input-group mb-3 container">
+          <input name="username" id="user_id_input" type="text" class="form-control" placeholder="User_id" aria-label="User_id" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button formmethod="post" formaction="search_pending" onclick="" class="btn btn-primary ">Search</button>
+          </div>
+
+      </form>
+    </div>
+  </section>
+
+
+  <section>
+    <div class="container" style="width: 90%;" id="head-color">
+      <form>
+        <p style="font-size: 40px">User Details</p>
+        <!-- <br> -->
+        <div class="form-group">
+
+          <% if(visitor.username!=""){ %>
+            <label for="pic">User Pic</label>
+           <div class="">
+            <img  name="pic" style="align: center;  margin: auto;padding: 10px;height: 150px;width:150px" src="<%= visitor.url %>" alt="">
+          </div>
+        <% } %>
+        </div>
+
+      <!-- <br> -->
+        <div class="form-group">
+          <label for="visitor_id">User_id</label>
+        </div>
+        <input name="username" type="text" class="form-control" id="visitor_id" value="<%= visitor.username %>" readonly style="color: black;">
+
+        <div class="form-group">
+          <label for="name">name</label>
+          <input name="name" type="text" class="form-control" id="name" value="<%= visitor.name %>">
+        </div>
+
+        <div class="form-group">
+          <label for="sex">sex</label>
+          <input name="sex" type="text" class="form-control" id="sex" value="<%= visitor.sex %>" readonly style="color: black;">
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputEmail1">email</label>
+          <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<%= visitor.email %>">
+        </div>
+
+        <div class="form-group">
+          <label for="mobile">mobile</label>
+          <input name="mobile" type="text" class="form-control" id="mobile" value="<%= visitor.mobile %>">
+        </div>
+
+        <div class="form-group">
+          <label for="address">address</label>
+          <input name="address" type="text" class="form-control" id="address" value="<%= visitor.address %>">
+        </div>
+
+        <div class="form-group">
+          <label for="status">card status</label>
+          <input name="status" type="text" class="form-control" id="address" value="<%= visitor.status %>" readonly style="color: black;">
+        </div>
+
+
+        <div class="form-group">
+          <label for="exampleInputEmail1">Visiting time</label>
+
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="visiting time" value="<%= visitor.inDate %>" readonly style="color: black;"/>
+            <!-- <span class="input-group-addon">-</span>
+            <input type="text" class="form-control" placeholder="leaving time" value="<%= visitor.outDate %>" readonly style="color: black;"/> -->
+          </div>
+
+
+      </form>
+
+
+      <br>
+
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <button formaction="accept_request" formmethod="post" onclick="" class="btn btn-primary btn-md">Accept</button>
+          <button formaction="instant_accept" formmethod="post" onclick="" class="btn btn-primary btn-md">Instant Accept</button>
+          <button formaction="del_request" formmethod="post" onclick="" class="btn btn-primary btn-md">DeLete Request</button>
+        </div>
+      </div>
+
+    </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="">
+      <table class="table container bg-light">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">S No.</th>
+            <th scope="col">user_id</th>
+            <th scope="col">name</th>
+            <th scope="col">sex</th>
+            <th scope="col">email_id</th>
+            <th scope="col">mobile</th>
+            <th scope="col">address</th>
+            <th scope="col">status</th>
+            <th scope="col">visiting time</th>
+            <!-- <th scope="col">leaving time</th> -->
+
+          </tr>
+        </thead>
+        <tbody>
+          <!-- console.log(details.length); -->
+          <% for (var i =details.length-1; i>=0;  i-- ) { %>
+          <tr scope="row">
+            <td><%= details.length -i %></td>
+            <td><%= details[i].username %> </td>
+            <td><%= details[i].name %></td>
+            <td><%= details[i].sex %></td>
+            <td><%= details[i].email %></td>
+            <td><%= details[i].mobile %></td>
+            <td><%= details[i].address %></td>
+            <td><%= details[i].status %></td>
+            <td><%= details[i].inDate %></td>
+            <!-- <td><%= details[i].outDate %></td> -->
+
+          </tr>
+
+          <% } %>
+
+        </tbody>
+      </table>
+
+    </div>
+  </section>
+
+  <footer class="panel-footer">
+    <div class="container" style="width: 100%">
+      <div class="row">
+        <section id="hours" class="col-sm-4">
+          <span>contact us:</span><br>
+          vms.sasy@gmail.com<br>
+
+
+          <a href="#" class="fa fa-facebook"></a>
+          <a href="#" class="fa fa-twitter"></a>
+          <a href="#" class="fa fa-linkedin"></a>
+          <a href="#" class="fa fa-instagram"></a>
+          <hr class="visible-xs">
+        </section>
+
+
+        <section id="address" class="col-sm-4">
+          <span>Address:</span><br>
+          IIIT - Allahabad, Jhalwa Campus, Deoghat<br>
+          Allahabad-211012<br>
+          India
+          <hr class="visible-xs">
+        </section>
+
+
+        <section id="testimonials" class="col-sm-4">
+          <p>About:</p>
+          <p>"VMS" is aimed to increase the efficiency of Visitor management systems in the hotel /residential places .The main objectiveis to increase security and safety of the visitors .
+          </p>
+          <p>owner: VMS</p>
+        </section>
+      </div>
+      <div class="text-right">&copy; Copyright VMS 2020. All rights reserved</div>
+    </div>
+  </footer>
+
+
+  <script src="js/jquery-3.5.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/ajax-utils.js"></script>
+  <script src="js/admin.js"></script>
+
+</body>
+
+</html>

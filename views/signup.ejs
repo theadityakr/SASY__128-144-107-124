@@ -43,14 +43,16 @@
 
         <!-- <a class="navbar-brand" href="/" id=""  style=" color: white;" >VMS</a> -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+          <span >
+            <img  src="/resources/square.png" width="40" height="40"  alt="">
+          </span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <a class="nav-item nav-link  navbar-ic-position " id="" href="" style="  color: white;">Home</a>
-            <a class="nav-item nav-link navbar-ic-position" style="  color: white;" href="logout">Logout</a>
+            <a class="nav-item nav-link navbar-ic-position" style="  color: white;" href="login">Login</a>
             <!-- <a class="nav-item nav-link navbar-ic-position active"  href="signup">signup</a> -->
-            <a class="nav-item nav-link navbar-ic-position active" href="profile" style="  color: white;">Profile</a>
+            <!-- <a class="nav-item nav-link navbar-ic-position active" href="profile" style="  color: white;">Profile</a> -->
             <!-- <div><button onclick="myFunction()"class="btn btn-primary">dark mode</button></div> -->
 
           </div>
@@ -63,9 +65,9 @@
 
     <div class="container" id="head-color">
 
-      <form style="margin-top: 80px">
+      <form id="signup-form" style="margin-top: 80px" action="/signup" method="post" >
 
-        <p style="font-size: 40px">New User Registration</p>
+        <p style="font-size: 40px">New Visitor Registration</p>
 
         <div class="form-group">
           <label for="exampleName">Name</label>
@@ -83,9 +85,11 @@
         </div>
 
         <div class="form-group">
-          <label for="exampleMobile">Mobile Number</label>
-          <input name="mobile" type="text" class="form-control" id="exampleMobile" required>
+          <label id ="mobile-number" for="exampleMobile">Mobile Number</label>
+          <input id="mobile" name="mobile" type="text" class="form-control" id="exampleMobile" required>
         </div>
+
+        <div style="color:red;" id="mobileResponseDiv"></div>
 
         <div class="form-group">
           <label for="exampleAddress">Address</label>
@@ -105,21 +109,41 @@
         </div>
 
         <div class="form-group">
-          <label for="exampleReason">Set Password</label>
+          <label id="setPass"for="exampleReason">Set Password</label>
           <input name="pass" type="password" class="form-control" id="exampleInputPassword1" required>
         </div>
-
-
-        <div class="container" style="margin-left: auto , margin-right: auto;">
-          <button class="btn btn-primary" style="margin-bottom: 10px;" id="snap">Capture</button>
-
-          <button class="btn btn-primary" id="upload-button" style="margin-bottom: 10px;" disabled onclick="upload()">Upload Image</button>
-          <!-- Stream video via webcam -->
-
-          <video id="video" width=300 height=300 playsinline controls autoplay></video>
-          <canvas style="align:center;" id="canvas" width="300" height="300"></canvas>
-
+        <div class="form-group">
+          <label for="exampleReason">Confirm Password</label>
+        <input  type = "password" class="form-control" name = "pswd2" id="exampleInputPassword2" required>
         </div>
+        <div style="color:red;" id="responseDiv"></div>
+        <div class="form-group">
+          <label for="date">Visiting Date</label>
+          <input name="date" type="date" class="form-control" id="date"  pattern="\d{2}-\d{2}-\d{4}" required>
+        </div>
+
+        <div class="form-group">
+        <label for="pic">Upload Your Photo</label>
+        <small id="emailHelp" class="form-text text-muted">Photo will be required for verification of your identity.</small>
+        <br></br>
+          <!-- <button class="btn btn-primary" id="upload-button" style="margin-bottom: 10px;" disabled onclick="upload()">Upload Image</button> -->
+          <!-- Stream video via webcam -->
+          <!-- <div class="container" style="margin-left: auto , margin-right: auto;"> -->
+          <video   name="pic" style=" transform: rotateY(180deg);
+    -webkit-transform:rotateY(180deg); /* Safari and Chrome */
+    -moz-transform:rotateY(180deg); text-align:center;display:block; margin: auto;
+"id="video" width="300" height="300"  autoplay></video>
+<!-- <br></br> -->
+<button name="pic" class="btn btn-primary" style=" display:block; margin: auto; margin-top: 15px ;margin-bottom: 15px;" id="snap">Capture</button>
+<!-- <br></br> -->
+          <canvas style=" transform: rotateY(180deg);
+    -webkit-transform:rotateY(180deg); /* Safari and Chrome */
+    -moz-transform:rotateY(180deg); text-align:center; display:block; margin: auto;" id="canvas" width="300" height="300"></canvas>
+
+
+
+        <!-- </div> -->
+      </div>
         <div class="">
           <input type="text" name="url" id="url" value="" hidden>
         </div>
@@ -128,7 +152,7 @@
           <label class="form-check-label" for="exampleCheck1">Accept terms and conditions</label>
         </div>
 
-        <button formaction="/signup" formmethod="post" type="submit" id="submit-button" disabled class="btn btn-primary">submit</button>
+        <button type="submit" id="submit-button" disabled class="btn btn-primary">submit</button>
 
       </form>
     </div>
@@ -196,6 +220,7 @@
     appId: "1:436501438451:web:55861e256d915128e9fc86",
     measurementId: "G-QTTWTF8QPG"
   };
+
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   console.log(firebase);
@@ -263,7 +288,7 @@
     button.textContent = 'Upload Image'
     document.body.appendChild(button)
 
-    document.getElementById("upload-button").disabled=false;
+    document.getElementById("submit-button").disabled=false;
 
   });
 
@@ -276,8 +301,10 @@
     for (let i = 0; i < 30; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
+    var date=new Date(Date.now());
     // const d=new Date() + '-' + 'base64';
     var src = canvas.toDataURL();
+    result=result+date;
     ref.child(result).putString(src, 'data_url').then(function(snapshot) {
       console.log('Uploaded a data_url string!');
       console.log(result);
@@ -294,7 +321,101 @@
       document.getElementById("submit-button").disabled=false;
     });
   }
+
+
+
+
 </script>
+
+<script >
+async function uploadImage() {
+  const ref = firebase.storage().ref();
+
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let result = ' ';
+  const charactersLength = characters.length;
+  for (let i = 0; i < 30; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  var date=new Date(Date.now());
+  // const d=new Date() + '-' + 'base64';
+  var src = canvas.toDataURL();
+  result=result+date;
+  ref.child(result).putString(src, 'data_url').then(function(snapshot) {
+    console.log('Uploaded a data_url string!');
+    console.log(result);
+    // console.log(src);
+    const storage = firebase.storage();
+    storage.ref(result).getDownloadURL()
+      .then((url) => {
+        // console.log(url);
+        document.getElementById("url").value = url;
+        $("#signup-form").submit();
+
+      })
+    // console.log(d.getDownloadURL());
+    // alert("Image Uploaded")
+
+    // document.getElementById("submit-button").disabled=false;
+
+  });
+
+}
+
+$(document).ready(function () {
+    $("#submit-button").click(function (e) {
+        e.preventDefault();
+        var matched,
+            password = $("#exampleInputPassword1").val(),
+            confirm = $("#exampleInputPassword2").val();
+            console.log(password);
+            console.log(confirm);
+            mobile=$("#mobile").val();
+
+
+        matched = (password == confirm) ? true : false;
+        if(matched && mobile.length==10) {
+            //Submit line commented out for example.  In production, remove the //
+            uploadImage();
+
+
+
+
+            //Shows success message and prevents submission.  In production, comment out the next 2 lines.
+            // $("#responseDiv").html("Passwords Match");
+            // return false;
+    }
+    else {
+      if(mobile.length!=10 && password!=confirm)
+      {
+        $("#mobileResponseDiv").html("Incorrect Mobile Number...<br></br>");
+        $("#responseDiv").html("Passwords don't match...<br></br>");
+        var x = $("#mobile-number").offset().left;
+        var y = $("#mobile-number").offset().top;
+        window.scrollTo(x,y);
+
+      }
+      else if(password!=confirm)
+      {  $("#responseDiv").html("Passwords don't match...<br></br>");
+        var x = $("#setPass").offset().left;
+        var y = $("#setPass").offset().top;
+        window.scrollTo(x,y);
+      }
+      else {
+        $("#mobileResponseDiv").html("Incorrect Mobile Number...<br></br>");
+        var x = 0;
+        var y = $("#mobile-number").offset().top;
+        window.scrollTo(x,y);
+
+      }
+        // topfunction();
+        return false;
+    }
+});
+});
+
+</script>
+
 
 
 

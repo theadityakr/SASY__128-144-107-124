@@ -46,7 +46,9 @@
         <!-- <a class="navbar-brand" href="/" id=""  style=" color: white;" >VMS</a> -->
         <a class="navbar-brand" href="/" style="  color: white;">VMS</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+          <span >
+            <img  src="/resources/square.png" width="40" height="40"  alt="">
+          </span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
@@ -66,7 +68,7 @@
     <%  var vuser= user.username%>
     <div class="form-container" id="head-color" style="padding-bottom: 10px">
 
-      <form>
+      <form id="reset-form" action="/resetPass" method="post">
 
         <div class="form-group">
           <input name="username" type="text" class="form-control" id="exampleInputId" value="<%= vuser %>" hidden> </input>
@@ -74,13 +76,16 @@
 
         <p style="font-size: 40px">Reset Password</p>
         <div class="form-group">
-          <label for="exampleInputId">Enter new password</label>
-          <input name="password" type="password" class="form-control" id="exampleInputId" required></input>
+          <label id="setPass" for="exampleInputId">Enter new password</label>
+          <input name="password" type="password" class="form-control" id="pass1" required></input>
         </div>
-        <!-- <div class="">
-          <p style="font-size: 15px">An email will be sent to your registered email account containing the link to reset the password.</p>
-        </div> -->
-        <button formaction="/resetPass" formmethod="post" type="submit" name="submit" id="login-button" class="btn btn-primary">Submit</button>
+        <div class="form-group">
+          <label for="exampleInputId">Confirm password</label>
+          <input name="password2" type="password" class="form-control" id="pass2" required></input>
+        </div>
+
+
+        <button type="submit" name="submit" id="submit-button" class="btn btn-primary">Submit</button>
 
       </form>
 
@@ -135,9 +140,39 @@
   <script src="js/bootstrap.min.js"></script>
   <script type="text/javascript" src="public/js/script.js"></script>
   <script type="text/javascript" src="js/app.js"></script>
-  <!-- <script  src> -->
+  <script >
+  $(document).ready(function () {
+      $("#submit-button").click(function (e) {
+          e.preventDefault();
+          var matched,
+              password = $("#pass1").val(),
+              confirm = $("#pass2").val();
 
-  <!-- </script> -->
+
+
+          matched = (password == confirm) ? true : false;
+          if(matched) {
+              //Submit line commented out for example.  In production, remove the //
+              $("#reset-form").submit();
+
+              //Shows success message and prevents submission.  In production, comment out the next 2 lines.
+              // $("#responseDiv").html("Passwords Match");
+              // return false;
+      }
+      else {
+
+         $("#responseDiv").html("Passwords don't match...<br></br>");
+          var x = 0;
+          var y = $("#setPass").offset().top;
+          window.scrollTo(x,y);
+
+          // topfunction();
+          return false;
+      }
+  });
+  });
+
+  </script>
 </body>
 
 </html>
