@@ -25,9 +25,11 @@
   <!-- css stylesheet  -->
   <!-- <link rel="stylesheet" href="/css/styles.css"> -->
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
 
   <!-- jquery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 
   <title>VMS</title>
 </head>
@@ -76,15 +78,17 @@
   <section id="login">
     <% if(user=="admin"){ %>
     <div class="align-login">
-      <a href="/profile">
+
         <div class="row">
-          <div class="col-sm-6 col-xs-12 col-card">
+          <div href="/profile" class="col-sm-6 col-xs-12 col-card">
+            <a href="/profile">
             <div class="login-card">
               <div class="card-body">
                 <h3 class="name"><strong>Admin Profile</strong></h3>
                 <img src="resources/user-login.png" class="admin-img img-fluid" alt="">
               </div>
             </div>
+          </a>
           </div>
         </div>
     </div>
@@ -93,15 +97,17 @@
 
     <% if(user=="visitor"){ %>
     <div class="align-login">
-      <a href="/profile">
+
         <div class="row">
-          <div class="col-sm-6 col-xs-12 col-card">
+          <div href="/profile" class="col-sm-6 col-xs-12 col-card">
+            <a href="/profile">
             <div class="login-card">
               <div class="card-body">
                 <h3 class="name"><strong>Visitor Profile</strong></h3>
                 <img src="resources/user-login.png" class="visito-img img-fluid" alt="">
               </div>
             </div>
+          </a>
           </div>
         </div>
     </div>
@@ -109,30 +115,36 @@
 
 
     <% if(user=="nil"){ %>
+      <div class="align-login">
 
-    <div class="align-login">
+          <div class="row">
+            <div class="col-sm-6 col-xs-12 col-card">
+              <a href="/signup">
+              <div class="login-card">
+                <div class="card-body">
+                  <h3 class="name"><strong>Want to Visit? Request HERE!!</strong></h3>
+                  <img src="resources/visitor-card.png" class="admin-img img-fluid" alt="">
+                </div>
+
+              </div>
+              </a>
+            </div>
+    <!-- <div class="align-login">
       <a href="/login">
-        <div class="row">
-          <div class="col-sm-6 col-xs-12 col-card">
+        <div class="row"> -->
+          <div href="/login" class="col-sm-6 col-xs-12 col-card">
+            <a href="/login">
             <div class="login-card">
               <div class="card-body">
-                <h3 class="name"><strong>Admin Login</strong></h3>
+                <h3 class="name"><strong>Login</strong></h3>
                 <img src="resources/user-login.png" class="admin-img img-fluid" alt="">
               </div>
             </div>
-          </div>
-
-          <div class="col-sm-6 col-xs-12 visitor-img col-card">
-            <div class="login-card">
-              <div class="card-body">
-                <h3 class="name"><strong>Visitor Login</strong></h3>
-                <img src="resources/user-login.png" class="visitor-img img-fluid" alt="">
-              </div>
-            </div>
+          </a>
           </div>
         </div>
-      </a>
-    </div>
+        </div>
+
     <% } %>
 
 
@@ -175,7 +187,7 @@
           <p>owner: VMS</p>
         </section>
       </div>
-      <div class="text-right">&copy; Copyright VMS 2020. All rights reserved.</div>
+      <div class="text-right" style="padding-bottom: 30px;">&copy; Copyright VMS 2020. All rights reserved.</div>
     </div>
   </footer>
 
@@ -187,6 +199,9 @@
   <!-- bootstrap js -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
   <script src="js/script.js"></script>
+  <script src="js/jquery-3.5.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+    <script src="js/ajax-utils.js"></script>
 
 </body>
 
