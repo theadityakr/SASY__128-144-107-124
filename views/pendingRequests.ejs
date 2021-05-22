@@ -73,6 +73,11 @@
   <h1 style="text-align: center;  margin: auto;"> Pending Requests </h1>
   <h1 style="text-align: right;  margin: auto; padding: 10px;"><%= Admin_Name %> </h1>
   <br>
+  <% if(details.length==0){ %>
+    <h3 style="text-align: center;  margin: auto;">No Pending Requests!</h3>
+    <% } %>
+
+  <% if(details.length>0){ %>
   <section>
     <div class="">
       <table class="table container bg-light table-hover">
@@ -138,6 +143,8 @@
 
     </div>
   </section>
+  <% } %>
+
 
   <footer class="panel-footer">
     <div class="container" style="width: 100%">

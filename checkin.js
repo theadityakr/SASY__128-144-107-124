@@ -43,6 +43,31 @@ module.exports = function(app) {
           today = yyyy + '-' + mm + '-' + dd;
           console.log(today);
 
+          var time = new Date(Date.now());
+          var min = time.getMinutes();
+          var sec= time.getSeconds();
+          var hr=time.getHours();
+          var ss="";
+          if(hr==0){
+            hr=12;
+            ss="AM";
+          }
+          else if(hr<12){
+            // hr=12;
+            ss="AM";
+          }
+          else if(hr==12){
+            ss="PM";
+          }
+          else if(hr>12){
+            hr=hr-12;
+            ss="PM";
+          }
+          time= hr+":"+min+":"+sec+" "+ss;
+          console.log(time);
+
+          today=today+" "+time;
+          console.log(today);
           User.updateOne({
             username: req.body.username
           }, {

@@ -31,7 +31,7 @@ module.exports = function(app) {
 
           var today = new Date(Date.now());
           var dd = today.getDate();
-          var mm = today.getMonth() + 1; 
+          var mm = today.getMonth() + 1;
           var yyyy = today.getFullYear();
           if (dd < 10) {
             dd = '0' + dd
@@ -41,6 +41,32 @@ module.exports = function(app) {
           }
 
           today = yyyy + '-' + mm + '-' + dd;
+          console.log(today);
+
+          var time = new Date(Date.now());
+          var min = time.getMinutes();
+          var sec= time.getSeconds();
+          var hr=time.getHours();
+          var ss="";
+          if(hr==0){
+            hr=12;
+            ss="AM";
+          }
+          else if(hr<12){
+            // hr=12;
+            ss="AM";
+          }
+          else if(hr==12){
+            ss="PM";
+          }
+          else if(hr>12){
+            hr=hr-12;
+            ss="PM";
+          }
+          time= hr+":"+min+":"+sec+" "+ss;
+          console.log(time);
+
+          today=today+" "+time;
           console.log(today);
 
           User.updateOne({

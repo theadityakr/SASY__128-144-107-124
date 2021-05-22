@@ -65,7 +65,7 @@
 
     <div class="container" id="head-color">
 
-      <form id="signup-form" style="margin-top: 80px" action="/signup" method="post" >
+      <form id="signup-form" style="margin-top: 80px" >
 
         <p style="font-size: 40px">New Visitor Registration</p>
 
@@ -278,6 +278,7 @@
 
   // Draw image
   var context = canvas.getContext('2d');
+  // context.scale(-1, 1);
   snap.addEventListener("click", function() {
     context.drawImage(video, 0, 0, 300, 300);
     var image = new Image();
@@ -350,6 +351,10 @@ async function uploadImage() {
       .then((url) => {
         // console.log(url);
         document.getElementById("url").value = url;
+        // action="/signup" method="post"
+        $("#signup-form").attr("action","signup");
+        $("#signup-form").attr("method","post");
+
         $("#signup-form").submit();
 
       })

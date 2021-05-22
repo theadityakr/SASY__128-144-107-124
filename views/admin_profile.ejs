@@ -57,7 +57,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
 
-
+            <a class="nav-item nav-link navbar-ic-position" href="profile" style="  color: white;">Profile</a>
             <a class="nav-item nav-link navbar-ic-position" href="pendingRequests" style="  color: white;">Pending Requests</a>
             <!-- <a class="nav-item nav-link navbar-ic-position" href="signup" style="  color: white;">Register New Visitor</a> -->
             <a class="nav-item nav-link navbar-ic-position" href="logout" style="  color: white;">Logout</a>
@@ -82,29 +82,33 @@
       <form action="search_visitor" method="post">
 
         <div class="input-group mb-3 container">
+          <h4 for="username" >Search User</h4>
           <input name="username" id="user_id_input" type="text" class="form-control" placeholder="User_id" aria-label="User_id" aria-describedby="basic-addon2">
           <div class="input-group-append">
-            <button formmethod="post" formaction="search_visitor" onclick="" class="btn btn-primary ">Search</button>
+
+            <button name="search-label" formmethod="post" formaction="search_visitor" onclick="" class="btn btn-primary ">Search</button>
           </div>
 
       </form>
     </div>
   </section>
 
-
+  <% if(visitor.username!=""){ %>
   <section>
+
     <div class="container" style="width: 90%;" id="head-color">
       <form id="update-form">
         <p style="font-size: 40px">User Details</p>
         <!-- <br> -->
         <div class="form-group">
 
-          <% if(visitor.username!=""){ %>
+
             <label for="pic">User Pic</label>
            <div class="">
-            <img  name="pic" style="align: center;  margin: auto;padding: 10px;height: 150px;width:150px" src="<%= visitor.url %>" alt="">
+            <img  name="pic" style="align: center;  margin: auto;padding: 10px;height: 150px;width:150px -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);" src="<%= visitor.url %>" alt="">
           </div>
-        <% } %>
+
         </div>
 
       <!-- <br> -->
@@ -175,6 +179,7 @@
     </div>
     </div>
   </section>
+  <% } %>
 
   <section>
     <div class="">

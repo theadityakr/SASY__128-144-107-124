@@ -78,7 +78,8 @@
     <%= Visitor_Name %>
   </h1>
   <div  class="">
-    <img  style="text-align: right;  margin: auto; margin-right: 10px; padding: 20px; height: 200px; width:200px; display:block"src="<%= visitor.url %>" alt="">
+    <img  style="text-align: right;  margin: auto; margin-right: 10px; padding: 20px; height: 200px; width:200px; display:block -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);"src="<%= visitor.url %>" alt="">
   </div>
 
   <h3 style="text-align: center;  margin: auto;padding: 10px; ">Status: <%= visitor.status %></h3>
