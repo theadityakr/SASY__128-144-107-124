@@ -41,8 +41,8 @@ module.exports = function(app){
 
   });
 
-  app.post("/resetPass",function(req,res){
-
+  app.post("/resetPass1",function(req,res){
+console.log("JAJJAJAJAJA");
   console.log(req.body.username);
   console.log(req.body.password);
     var user = new User({username: req.body.username});

@@ -68,7 +68,7 @@
     <%  var vuser= user.username%>
     <div class="form-container" id="head-color" style="padding-bottom: 10px">
 
-      <form id="reset-form" action="/resetPass" method="post">
+      <form id="reset-form1" method="post" action="resetPass1">
 
         <div class="form-group">
           <input name="username" type="text" class="form-control" id="exampleInputId" value="<%= vuser %>" hidden> </input>
@@ -83,9 +83,10 @@
           <label for="exampleInputId">Confirm password</label>
           <input name="password2" type="password" class="form-control" id="pass2" required></input>
         </div>
+          <div style="color:red;" id="responseDiv"></div>
 
+        <button  name="submit" id="submit-button" disabled class="btn btn-primary">Submit</button>
 
-        <button type="submit" name="submit" id="submit-button" class="btn btn-primary">Submit</button>
 
       </form>
 
@@ -136,41 +137,69 @@
 
 
 
-  <script src="js/jquery-3.5.1.min.js"></script>
+  <!-- <script src="js/jquery-3.5.1.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script type="text/javascript" src="public/js/script.js"></script>
-  <script type="text/javascript" src="js/app.js"></script>
+  <script type="text/javascript" src="js/app.js"></script> -->
+
+  <script src="js/jquery-3.5.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/ajax-utils.js"></script>
+  <script src="js/admin.js"></script>
   <script >
-  $(document).ready(function () {
-      $("#submit-button").click(function (e) {
-          e.preventDefault();
-          var matched,
-              password = $("#pass1").val(),
-              confirm = $("#pass2").val();
 
+$(document).ready(function(){
+  $("#pass1").keyup(function(){
+    var matched,
+        password1 = $("#pass1").val(),
+        confirm = $("#pass2").val();
 
+    console.log(password1);
 
-          matched = (password == confirm) ? true : false;
-          if(matched) {
-              //Submit line commented out for example.  In production, remove the //
-              $("#reset-form").submit();
-
-              //Shows success message and prevents submission.  In production, comment out the next 2 lines.
-              // $("#responseDiv").html("Passwords Match");
-              // return false;
-      }
-      else {
-
-         $("#responseDiv").html("Passwords don't match...<br></br>");
-          var x = 0;
-          var y = $("#setPass").offset().top;
-          window.scrollTo(x,y);
-
-          // topfunction();
-          return false;
-      }
+              console.log(confirm);
+    if (password1 == confirm) {
+      matched=true;
+    }
+    else{
+      matched=false;
+    }
+    if(matched==true && password1.length!=""){
+      $("#submit-button").attr("disabled", false);
+      $("#responseDiv").html("");
+    }
+    else{
+        $("#submit-button").attr("disabled", true);
+        $("#responseDiv").html("Passwords don't match...<br></br>");
+    }
   });
+});
+$(document).ready(function(){
+  $("#pass2").keyup(function(){
+    var matched,
+        password1 = $("#pass1").val(),
+        confirm = $("#pass2").val();
+
+    console.log(password1);
+
+              console.log(confirm);
+    if (password1 == confirm) {
+      matched=true;
+    }
+    else{
+      matched=false;
+    }
+    if(matched==true && password1.length!=""){
+      $("#submit-button").attr("disabled", false);
+      $("#responseDiv").html("");
+
+    }
+    else{
+        $("#submit-button").attr("disabled", true);
+        $("#responseDiv").html("Passwords don't match...<br></br>");
+    }
   });
+});
 
   </script>
 </body>
