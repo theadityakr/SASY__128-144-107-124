@@ -11,9 +11,73 @@ HTML, CSS, Javascript, NodeJS, ExpressJS, MongoDB
 
 
 
-![Screenshot_2021-05-02 VMS](https://user-images.githubusercontent.com/59906496/116796394-9e0a8400-aaf9-11eb-9edc-f6d8d2b62559.png)
-![Screenshot_2021-05-02 Login](https://user-images.githubusercontent.com/59906496/116796578-2b9aa380-aafb-11eb-8bf4-1df2cad66244.png)
-![Screenshot_2021-05-02 Admin Profile](https://user-images.githubusercontent.com/59906496/116796546-e8d8cb80-aafa-11eb-9033-25c018853f2a.png)
-![Screenshot_2021-05-02 signup](https://user-images.githubusercontent.com/59906496/116796550-ef674300-aafa-11eb-83ad-45b411eac546.png)
-![Screenshot_2021-05-02 Registration on VMS - theaditykr gmail com - Gmail](https://user-images.githubusercontent.com/59906496/116796558-f9894180-aafa-11eb-8b4b-ae08654ac13d.png)
-![Screenshot_2021-05-02 Visitor Profile](https://user-images.githubusercontent.com/59906496/116796562-0148e600-aafb-11eb-964c-4711f0bded2a.png)
+
+Home page :
+
+![image](https://user-images.githubusercontent.com/67595608/119260177-3e326500-bbef-11eb-8baf-62de250a078c.png)
+
+
+![image](https://user-images.githubusercontent.com/67595608/119260200-602be780-bbef-11eb-8d28-e232bdaa5dc2.png)
+
+
+
+
+
+
+Self Registration Page :
+
+
+![image](https://user-images.githubusercontent.com/67595608/119260242-90738600-bbef-11eb-95b8-847129e46d79.png)
+
+
+
+
+
+![image](https://user-images.githubusercontent.com/67595608/119260261-b4cf6280-bbef-11eb-9cbe-1144e839d276.png)
+
+
+
+
+
+Login Page :
+
+![image](https://user-images.githubusercontent.com/67595608/119260291-daf50280-bbef-11eb-9660-65409bcc974a.png)
+
+
+
+
+
+Admin Page :
+
+
+![image](https://user-images.githubusercontent.com/67595608/119260384-2e675080-bbf0-11eb-865c-262bc265301a.png)
+
+
+
+
+Check and Monitor :
+
+![image](https://user-images.githubusercontent.com/67595608/119260420-4f2fa600-bbf0-11eb-9c82-9eb0675ab52f.png)
+
+
+
+
+Admin Info :
+
+
+
+![image](https://user-images.githubusercontent.com/67595608/119260461-800fdb00-bbf0-11eb-8197-f7f40bc53b10.png)
+
+
+
+
+
+
+Pending Requests :
+
+
+
+![image](https://user-images.githubusercontent.com/67595608/119260481-9b7ae600-bbf0-11eb-8fc7-eef1a963e550.png)
+
+
+
