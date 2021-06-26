@@ -35,6 +35,9 @@ Self Registration Page :
 
 ![image](https://user-images.githubusercontent.com/67595608/119260261-b4cf6280-bbef-11eb-9cbe-1144e839d276.png)
 
+![image](https://user-images.githubusercontent.com/59906496/123525194-8e1fb280-d6ec-11eb-8403-dedfb9333baa.png)
+
+
 
 
 
@@ -77,7 +80,18 @@ Pending Requests :
 
 
 
-![image](https://user-images.githubusercontent.com/67595608/119260481-9b7ae600-bbf0-11eb-8fc7-eef1a963e550.png)
+![image](https://user-images.githubusercontent.com/59906496/123525218-aabbea80-d6ec-11eb-97cb-fea5767c2180.png)
+
+Request Accepted : 
+
+![image](https://user-images.githubusercontent.com/59906496/123525230-c0311480-d6ec-11eb-90b0-651a74b183b4.png)
 
 
+Visitor Login After : 
+![image](https://user-images.githubusercontent.com/59906496/123525251-e22a9700-d6ec-11eb-89ae-4a083e83d7f3.png)
 
+![image](https://user-images.githubusercontent.com/59906496/123525260-efe01c80-d6ec-11eb-8b61-47a66a5725b5.png)
+
+
+Mobile View : 
+![Screenshot (1822)](https://user-images.githubusercontent.com/59906496/123525308-3b92c600-d6ed-11eb-930c-e5d5275e3ff4.png)
